@@ -9,9 +9,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Mente Clara">
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
   <script>
     try { if (JSON.parse(localStorage.getItem('mc_lock') || 'null')?.pinHash) document.documentElement.classList.add('mc-locked'); } catch (e) {}
   </script>
@@ -379,7 +379,6 @@
               <svg viewBox="0 0 120 210" class="w-full h-full drop-shadow-sm" aria-label="Silueta de la nave Hail Mary">
                 <defs>
                   <clipPath id="hailMaryHullClip">
-                    <!-- Ojiva superior + cuerpo cilíndrico de tanques + sección de motores -->
                     <path d="M60 10 C42 28, 36 48, 36 68 L36 146 L26 164 L36 164 L36 174 L84 174 L84 164 L94 164 L84 146 L84 68 C84 48, 78 28, 60 10 Z" />
                   </clipPath>
                 </defs>
@@ -391,7 +390,6 @@
                 <!-- Líquido / Astrofago dinámico -->
                 <g clip-path="url(#hailMaryHullClip)">
                   <rect id="hmFuelRect" x="20" y="174" width="80" height="0" fill="#5C7675" />
-                  <!-- Marcas internas de nivel -->
                   <line x1="36" y1="138" x2="84" y2="138" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3 3" />
                   <line x1="36" y1="102" x2="84" y2="102" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3 3" />
                   <line x1="36" y1="68" x2="84" y2="68" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" />
@@ -400,12 +398,9 @@
                 <!-- Contorno estructural de la nave Hail Mary -->
                 <path d="M60 10 C42 28, 36 48, 36 68 L36 146 L26 164 L36 164 L36 174 L84 174 L84 164 L94 164 L84 146 L84 68 C84 48, 78 28, 60 10 Z"
                       fill="none" stroke="currentColor" stroke-width="2.5" class="text-carbon/70 dark:text-arena/80" />
-                <!-- Escotilla / Módulo laboratorio -->
                 <circle cx="60" cy="48" r="6" fill="none" stroke="currentColor" stroke-width="2" class="text-carbon/70 dark:text-arena/80" />
-                <!-- Toberas Spin Drive -->
                 <path d="M41 174 L38 188 L50 188 L49 174 M55 174 L54 190 L66 190 L65 174 M71 174 L70 188 L82 188 L79 174"
                       fill="none" stroke="currentColor" stroke-width="2" class="text-terracota dark:text-tierra" />
-                <!-- Estela de propulsión (visible en sobrecarga) -->
                 <g id="hmThrusterFlame" class="hidden">
                   <path d="M40 190 L44 206 L48 190 M56 192 L60 210 L64 192 M72 190 L76 206 L80 190"
                         fill="none" stroke="#D97706" stroke-width="2.2" stroke-linecap="round" />
@@ -1563,7 +1558,7 @@
     }
 
     function getCurrentMonthKey(dateInput) {
-      return getLocalDateKey(dateInput).slice(0, 7); // YYYY-MM
+      return getLocalDateKey(dateInput).slice(0, 7);
     }
 
     function esc(value) {
@@ -1625,13 +1620,10 @@
         manualNightShield: null,
         dailyLogs: dailyLogs,
         customRelapseTriggers: [],
-        // Sistema de XP y Pilares
         xpTotal: 0,
         pillarXp: { universidad: 0, freestyle: 0, claridad: 0, presencia: 0 },
-        // Tracker de Hábitos (vacío por defecto para que el usuario agregue los suyos)
         habits: [],
         anchorHabitId: null,
-        // Incubadora de 21 días + Sistema adaptativo de Hielitos
         challenges21: [],
         iceCubes: {
           currentMonth: getCurrentMonthKey(now),
@@ -1639,12 +1631,11 @@
           monthlyQuota: 2,
           lastCalibrationNote: 'Cuota base inicial: 2 hielitos al mes'
         },
-        // Tanque Hail Mary (Agua por vasos)
         waterSettings: {
           minGoal: 8,
           maxExtra: 4
         },
-        waterLogs: {}, // { 'YYYY-MM-DD': { cups: 0, goalXpClaimed: false, extraXpClaimed: 0 } }
+        waterLogs: {},
         activeBarriers: [
           {
             id: 'bar_default_1',
@@ -1790,7 +1781,6 @@
       const activePanel = document.getElementById(`view_${tabName}`);
       if (activePanel) activePanel.classList.remove('hidden');
 
-      // Estilo escritorio
       document.querySelectorAll('.main-tab-btn').forEach(btn => {
         btn.className = "main-tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2";
       });
@@ -1799,7 +1789,6 @@
         deskBtn.className = "main-tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold bg-verdemar text-espuma transition flex items-center justify-center gap-2 shadow-xs";
       }
 
-      // Estilo móvil
       document.querySelectorAll('.mob-tab-btn').forEach(btn => {
         btn.className = "mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-piedra dark:text-crema/70 font-medium text-[11px]";
       });
@@ -1916,14 +1905,12 @@
 
       rec.cups = newCups;
 
-      // Recompensa al alcanzar meta mínima
       if (rec.cups >= minGoal && !rec.goalXpClaimed) {
         rec.goalXpClaimed = true;
         addXp(12, 'claridad', 'universidad');
         showToast("¡Tanque Hail Mary al 100%! +12 XP de soporte vital.");
       }
 
-      // Bono por vasos extra (hasta maxExtra)
       if (rec.cups > minGoal) {
         const currentExtras = Math.min(maxExtra, rec.cups - minGoal);
         if (currentExtras > (rec.extraXpClaimed || 0)) {
@@ -1957,9 +1944,6 @@
       const flame = document.getElementById('hmThrusterFlame');
       const fuelRect = document.getElementById('hmFuelRect');
 
-      // Altura total del casco en SVG: de y=174 (vacío) hasta y=10 (lleno) -> altura máx 164
-      const visualRatio = Math.min(1, rec.cups / (minGoal + maxExtra));
-      // Al llegar a minGoal llega al 78% de la ojiva; los vasos extra llenan la punta
       const mappedFill = rec.cups <= minGoal
         ? (rec.cups / minGoal) * 0.78
         : 0.78 + (Math.min(maxExtra, rec.cups - minGoal) / maxExtra) * 0.22;
@@ -1970,7 +1954,7 @@
       fuelRect.setAttribute('height', String(fillHeight));
 
       if (isOverdrive) {
-        fuelRect.setAttribute('fill', '#D97706'); // Ámbar dorado Astrofago
+        fuelRect.setAttribute('fill', '#D97706');
         flame.classList.remove('hidden');
         pctLabel.className = "text-xs font-bold text-amber-600 dark:text-amber-400";
         pctLabel.textContent = `${pct}% · Propulsión Astrofago (+${rec.cups - minGoal} extra)`;
@@ -2000,7 +1984,6 @@
       }
 
       if (appState.iceCubes.currentMonth !== currentMonth) {
-        // Analizar fallos y hielitos usados el mes anterior en retos de 21 días
         const prevMonth = appState.iceCubes.currentMonth;
         let prevMonthMisses = 0;
 
@@ -2014,7 +1997,6 @@
           }
         });
 
-        // Recalibrar cuota retadora pero razonable: mínimo 2, máximo 5
         const calibratedQuota = prevMonthMisses >= 2
           ? Math.min(5, Math.max(2, Math.ceil(prevMonthMisses * 0.75)))
           : 2;
@@ -2099,7 +2081,7 @@
           weeklyTarget,
           primaryPillar,
           secondaryPillar,
-          logs: {}, // { 'YYYY-MM-DD': 'done' | 'missed' | 'postponed' }
+          logs: {},
           createdAt: new Date().toISOString()
         });
         showToast(`Hábito "${name}" añadido a tu lista diaria.`);
@@ -2111,7 +2093,7 @@
           secondaryPillar,
           currentStreak: 0,
           bestRecord: 0,
-          history: {}, // { 'YYYY-MM-DD': 'done' | 'frozen' | 'missed' }
+          history: {},
           createdAt: new Date().toISOString()
         });
         showToast(`Reto de 21 días "${name}" iniciado.`);
@@ -2139,13 +2121,11 @@
       const todayKey = getLocalDateKey(new Date());
       const prevStatus = habit.logs[todayKey] || null;
 
-      // Si pulsa el mismo estado, lo desmarca (vuelve a pendiente)
       if (prevStatus === status) {
         delete habit.logs[todayKey];
         if (prevStatus === 'done') addXp(-8, habit.primaryPillar, habit.secondaryPillar);
         if (prevStatus === 'missed') addXp(4, habit.primaryPillar, null);
       } else {
-        // Revertir efecto previo si existía
         if (prevStatus === 'done') addXp(-8, habit.primaryPillar, habit.secondaryPillar);
         if (prevStatus === 'missed') addXp(4, habit.primaryPillar, null);
 
@@ -2272,7 +2252,6 @@
           showToast(`¡Día ${ch.currentStreak}/21 completado en "${ch.name}"! (+10 XP)`);
         }
       } else if (action === 'miss') {
-        // Activación automática del Hielito si hay disponibles
         if ((appState.iceCubes.available || 0) > 0) {
           appState.iceCubes.available--;
           ch.history[todayKey] = 'frozen';
@@ -2379,7 +2358,7 @@
       }).join('');
     }
 
-    // --- PANEL DE ESTADÍSTICAS DIARIAS DE HÁBITOS (PESTAÑA PROGRESO) ---
+    // --- PANEL DE ESTADÍSTICAS DIARIAS DE HÁBITOS ---
     function shiftHabitStatsDate(deltaDays) {
       const input = document.getElementById('habitStatsDateInput');
       const base = input.value ? new Date(input.value + 'T12:00:00') : new Date();
@@ -3345,9 +3324,7 @@
       const val = sel.value;
       if (!val) return;
       const ta = document.getElementById('journalTextarea');
-      ta.value = val + "
-
-";
+      ta.value = val + "\n\n";
       ta.focus();
       sel.value = "";
     }
@@ -3531,7 +3508,6 @@
       const waterRec = appState.waterLogs[dateKey] || null;
       const prediction = computeDatePrediction(dateKey);
 
-      // Resumen nativo de hábitos en esa fecha
       let habitsDone = 0;
       let habitsTotal = appState.habits.length;
       appState.habits.forEach(h => {
@@ -3819,7 +3795,6 @@
       const periodImpulses = appState.impulses.filter(i => new Date(i.date).getTime() >= cutoff);
       const olderImpulses = cutoff > 0 ? appState.impulses.filter(i => new Date(i.date).getTime() < cutoff) : [];
 
-      // 1. Detonantes y franjas horarias
       const periodTriggers = {};
       const periodHours = {};
       periodImpulses.forEach(i => {
@@ -3841,7 +3816,6 @@
 
       const topTimeSlot = Object.entries(periodHours).sort((a, b) => b[1] - a[1])[0];
 
-      // 2. Auditoría nativa de Hábitos e Hidratación en la ventana seleccionada
       const dateKeysInWindow = [];
       for (let d = 0; d < daysWindow; d++) {
         dateKeysInWindow.push(getLocalDateKey(new Date(now - d * 86400000)));
@@ -3861,7 +3835,6 @@
         return `  - ${h.name}${isAnchorTag}: ${done} cumplidos, ${missed} fallidos, ${postponed} pospuestos (meta: ${h.weeklyTarget}x/sem)`;
       });
 
-      // Hidratación Hail Mary promedio
       let waterDaysCount = 0;
       let waterCupsSum = 0;
       let waterGoalMetDays = 0;
@@ -3878,7 +3851,6 @@
         ? `Promedio ${(waterCupsSum / waterDaysCount).toFixed(1)} vasos/día (${waterGoalMetDays}/${waterDaysCount} días con meta mínima de ${minGoal} vasos alcanzada).`
         : 'Sin registros de hidratación en este periodo.';
 
-      // 3. Motor agnóstico de correlaciones empíricas (sin prejuicios prefabricados)
       const empiricalPatterns = [];
       const eventDateKeys = [...new Set(periodImpulses.map(i => getLocalDateKey(i.date)))];
 
@@ -3894,7 +3866,6 @@
         });
       }
 
-      // Verificar eficacia real del Hábito Ancla marcado por el usuario
       if (appState.anchorHabitId && appState.habits.length > 1) {
         const anchor = appState.habits.find(h => h.id === appState.anchorHabitId);
         if (anchor) {
@@ -3915,7 +3886,6 @@
         }
       }
 
-      // 4. Comparativa histórica y retos de 21 días
       const periodWeeks = Math.max(1, daysWindow / 7);
       const periodUrgesPerWeek = (periodImpulses.filter(i => i.type === 'impulse').length / periodWeeks).toFixed(1);
       const periodRelapsesCount = periodImpulses.filter(i => i.type === 'relapse').length;
@@ -3929,13 +3899,11 @@
       }
 
       const challengesLines = appState.challenges21.length
-        ? appState.challenges21.map(c => `  - "${c.name}": racha actual ${c.currentStreak}/21 días (Récord: ${c.bestRecord}d)`).join('
-')
+        ? appState.challenges21.map(c => `  - "${c.name}": racha actual ${c.currentStreak}/21 días (Récord: ${c.bestRecord}d)`).join('\n')
         : '  - Ningún reto de 21 días en curso.';
 
       const barriersLines = appState.activeBarriers.length
-        ? appState.activeBarriers.map(b => `  - [${b.checkedDates ? Object.keys(b.checkedDates).length : 0} días cumplida] "${b.rule}" (Bloquea: ${b.pattern})`).join('
-')
+        ? appState.activeBarriers.map(b => `  - [${b.checkedDates ? Object.keys(b.checkedDates).length : 0} días cumplida] "${b.rule}" (Bloquea: ${b.pattern})`).join('\n')
         : '  - Ninguna barrera activa configurada todavía.';
 
       return {
@@ -3943,11 +3911,9 @@
         topTriggers,
         topTimeSlot: topTimeSlot ? `${topTimeSlot[0]} (${topTimeSlot[1]} eventos)` : 'Sin datos horarios',
         historicalComparison,
-        habitPerformanceLines: habitPerformanceLines.length ? habitPerformanceLines.join('
-') : '  - Sin hábitos registrados todavía.',
+        habitPerformanceLines: habitPerformanceLines.length ? habitPerformanceLines.join('\n') : '  - Sin hábitos registrados todavía.',
         waterSummary,
-        empiricalPatterns: empiricalPatterns.length ? empiricalPatterns.map(p => `  - ${p}`).join('
-') : '  - Sin correlaciones repetidas estadísticamente significativas aún.',
+        empiricalPatterns: empiricalPatterns.length ? empiricalPatterns.map(p => `  - ${p}`).join('\n') : '  - Sin correlaciones repetidas estadísticamente significativas aún.',
         challengesLines,
         barriersLines
       };
@@ -3969,13 +3935,11 @@
             const timeStr = dt.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
             const prefix = i.type === 'relapse' ? 'TROPIEZO' : `Impulso ${i.intensity}/10`;
             return `  - [${dt.toLocaleDateString('es-ES')} ${timeStr}] (${prefix}) | ${i.modality} | Detonante: ${i.emotion} | Detalle: ${i.note || 'N/A'}`;
-          }).join('
-')
+          }).join('\n')
         : '  - Sin impulsos o tropiezos registrados en este periodo.';
 
       const journalLines = recentJournals.length
-        ? recentJournals.slice(0, 20).map(j => `  - [${new Date(j.date).toLocaleDateString('es-ES')} · ${j.tag}]: ${j.content}`).join('
-')
+        ? recentJournals.slice(0, 20).map(j => `  - [${new Date(j.date).toLocaleDateString('es-ES')} · ${j.tag}]: ${j.content}`).join('\n')
         : '  - Sin notas escritas en este periodo.';
 
       const prompt = `Actúa como mi entrenador personal cálido, compasivo y estratégico para el sistema "Mente Clara".
@@ -4052,8 +4016,7 @@ BARRERA | [Regla física o digital concreta para añadir al checklist nocturno] 
         return;
       }
 
-      const lines = raw.split('
-').map(l => l.trim()).filter(Boolean);
+      const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
       let cardsAdded = 0;
       let alertsAdded = 0;
       let barriersAdded = 0;
@@ -4180,7 +4143,7 @@ BARRERA | [Regla física o digital concreta para añadir al checklist nocturno] 
       renderAll();
     });
   </script>
-  <script src="/js/extras.js"></script>
-  <script type="module" src="/js/account.js"></script>
+  <script src="./js/extras.js"></script>
+  <script type="module" src="./js/account.js"></script>
 </body>
 </html>
