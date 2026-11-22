@@ -4150,7 +4150,19 @@ BARRERA | [Regla física o digital concreta para añadir al checklist nocturno] 
   <!-- ===================================================================== -->
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithPopup,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     const menteClaraFirebaseConfig = {
       apiKey: "AIzaSyBLY8sSXbR79vHVtc4ziYYpSGR_me-IldA",
@@ -4162,64 +4174,137 @@ BARRERA | [Regla física o digital concreta para añadir al checklist nocturno] 
       measurementId: "G-C8H0T0QQT3"
     };
 
-    // Instancia propia de Mente Clara para no chocar con otras apps de Firebase
     const MC_APP_NAME = "menteClaraApp";
     const mcApp = getApps().some(a => a.name === MC_APP_NAME)
       ? getApp(MC_APP_NAME)
       : initializeApp(menteClaraFirebaseConfig, MC_APP_NAME);
 
+    const mcAuth = getAuth(mcApp);
     const mcDb = getFirestore(mcApp);
-    const MC_DOC_REF = doc(mcDb, "mente_clara_db", "usuario_principal");
+    const mcProvider = new GoogleAuthProvider();
 
-    window.menteClaraCloud = {
-      async save(stateObj) {
-        await setDoc(MC_DOC_REF, {
-          updatedAt: new Date().toISOString(),
-          state: JSON.parse(JSON.stringify(stateObj))
-        }, { merge: true });
-      },
-      async load() {
-        const snap = await getDoc(MC_DOC_REF);
-        return snap.exists() ? snap.data().state : null;
+    let currentMcUser = null;
+
+    function getUserDocRef() {
+      if (!currentMcUser) return null;
+      return doc(mcDb, "mente_clara_users", currentMcUser.uid);
+    }
+
+    async function saveAppStateToCloud(stateObj) {
+      const ref = getUserDocRef();
+      if (!ref || !stateObj) return;
+      await setDoc(ref, {
+        email: currentMcUser.email || "",
+        updatedAt: new Date().toISOString(),
+        state: JSON.parse(JSON.stringify(stateObj))
+      }, { merge: true });
+    }
+
+    async function loadAppStateFromCloud() {
+      const ref = getUserDocRef();
+      if (!ref) return null;
+      const snap = await getDoc(ref);
+      return snap.exists() ? snap.data().state : null;
+    }
+
+    function updateAccountUi(user) {
+      const googleBtn = document.getElementById("accountGoogleButton");
+      const statusEl = document.getElementById("accountLoginStatus");
+      const loggedOutBox = document.getElementById("accountLoggedOut");
+      const loggedInBox = document.getElementById("accountLoggedIn");
+      const emailEl = document.getElementById("accountEmail");
+      const syncStatusEl = document.getElementById("accountSyncStatus");
+      const headerLabel = document.getElementById("accountHeaderLabel");
+
+      if (googleBtn) googleBtn.disabled = false;
+
+      if (user) {
+        if (loggedOutBox) loggedOutBox.classList.add("hidden");
+        if (loggedInBox) loggedInBox.classList.remove("hidden");
+        if (emailEl) emailEl.textContent = user.email || "Usuario de Google";
+        if (syncStatusEl) syncStatusEl.textContent = "Conectado a Firestore en tu cuenta.";
+        if (headerLabel) headerLabel.textContent = user.email ? user.email.split("@")[0] : "Cuenta";
+        if (statusEl) statusEl.hidden = true;
+      } else {
+        if (loggedOutBox) loggedOutBox.classList.remove("hidden");
+        if (loggedInBox) loggedInBox.classList.add("hidden");
+        if (headerLabel) headerLabel.textContent = "Cuenta";
+      }
+    }
+
+    window.accountLoginGoogle = async function () {
+      const statusEl = document.getElementById("accountLoginStatus");
+      try {
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.textContent = "Abriendo ventana de Google...";
+        }
+        await signInWithPopup(mcAuth, mcProvider);
+      } catch (err) {
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.textContent = "No se pudo iniciar sesión: " + (err?.message || err);
+        }
       }
     };
-    // =========================================================================
-    // PASO 5: SINCRONIZACIÓN AUTOMÁTICA DE MENTE CLARA CON FIRESTORE
-    // =========================================================================
+
+    window.accountLogout = async function () {
+      try {
+        await signOut(mcAuth);
+        if (typeof showToast === "function") showToast("Sesión cerrada.");
+      } catch (err) {
+        console.warn("Error cerrando sesión:", err);
+      }
+    };
+
+    window.syncNow = async function () {
+      if (!currentMcUser || typeof appState === "undefined") return;
+      try {
+        await saveAppStateToCloud(appState);
+        const syncStatusEl = document.getElementById("accountSyncStatus");
+        if (syncStatusEl) {
+          syncStatusEl.textContent = "Sincronizado ahora (" + new Date().toLocaleTimeString() + ")";
+        }
+        if (typeof showToast === "function") showToast("Avances guardados en Firebase.");
+      } catch (err) {
+        if (typeof showToast === "function") showToast("Error al sincronizar con Firebase.", "error");
+      }
+    };
+
     window.onStateSaved = function () {
-      if (!window.menteClaraCloud || typeof appState === 'undefined') return;
-      window.menteClaraCloud.save(appState).catch(err => {
-        console.warn("Sincronización con Firestore pendiente (respaldo local activo):", err);
+      if (!currentMcUser || typeof appState === "undefined") return;
+      saveAppStateToCloud(appState).catch(err => {
+        console.warn("Error guardando cambio en Firestore:", err);
       });
     };
 
-    async function hydrateFromMenteClaraCloud() {
-      if (!window.menteClaraCloud || typeof appState === 'undefined') return;
-      try {
-        const remoteState = await window.menteClaraCloud.load();
-        if (!remoteState || typeof remoteState !== 'object') return;
+    onAuthStateChanged(mcAuth, async (user) => {
+      currentMcUser = user;
+      updateAccountUi(user);
 
-        const localTs = appState._updatedAt ? Date.parse(appState._updatedAt) : 0;
-        const remoteTs = remoteState._updatedAt ? Date.parse(remoteState._updatedAt) : 0;
+      if (user && typeof appState !== "undefined") {
+        try {
+          const remoteState = await loadAppStateFromCloud();
+          if (remoteState && typeof remoteState === "object") {
+            const localTs = appState._updatedAt ? Date.parse(appState._updatedAt) : 0;
+            const remoteTs = remoteState._updatedAt ? Date.parse(remoteState._updatedAt) : 0;
 
-        if (remoteTs > localTs) {
-          appState = Object.assign(getDefaultState(), remoteState);
-          saveState({ fromSync: true });
-          renderAll();
-          showToast("Datos sincronizados desde la nube.");
-        } else if (localTs > remoteTs) {
-          await window.menteClaraCloud.save(appState);
+            if (remoteTs > localTs) {
+              appState = Object.assign(getDefaultState(), remoteState);
+              saveState({ fromSync: true });
+              if (typeof renderAll === "function") renderAll();
+              if (typeof showToast === "function") showToast("Tus avances se cargaron desde la nube.");
+            } else {
+              await saveAppStateToCloud(appState);
+            }
+          } else {
+            await saveAppStateToCloud(appState);
+          }
+        } catch (err) {
+          console.warn("Error al sincronizar al iniciar sesión:", err);
         }
-      } catch (err) {
-        console.warn("No se pudo cargar estado inicial desde Firestore:", err);
       }
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => setTimeout(hydrateFromMenteClaraCloud, 300));
-    } else {
-      setTimeout(hydrateFromMenteClaraCloud, 300);
-    }
+    });
   </script>
 </body>
 </html>
