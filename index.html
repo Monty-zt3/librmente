@@ -4145,5 +4145,45 @@ BARRERA | [Regla física o digital concreta para añadir al checklist nocturno] 
   </script>
   <script src="./js/extras.js"></script>
   <script type="module" src="./js/account.js"></script>
+  <!-- ===================================================================== -->
+  <!-- PASO 4: CONEXIÓN FIREBASE FIRESTORE PARA MENTE CLARA                  -->
+  <!-- ===================================================================== -->
+  <script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    const menteClaraFirebaseConfig = {
+      apiKey: "AIzaSyBLY8sSXbR79vHVtc4ziYYpSGR_me-IldA",
+      authDomain: "mentelimpia-245f4.firebaseapp.com",
+      projectId: "mentelimpia-245f4",
+      storageBucket: "mentelimpia-245f4.firebasestorage.app",
+      messagingSenderId: "544294098732",
+      appId: "1:544294098732:web:b49e39e8963aadef23be89",
+      measurementId: "G-C8H0T0QQT3"
+    };
+
+    // Instancia propia de Mente Clara para no chocar con otras apps de Firebase
+    const MC_APP_NAME = "menteClaraApp";
+    const mcApp = getApps().some(a => a.name === MC_APP_NAME)
+      ? getApp(MC_APP_NAME)
+      : initializeApp(menteClaraFirebaseConfig, MC_APP_NAME);
+
+    const mcDb = getFirestore(mcApp);
+    const MC_DOC_REF = doc(mcDb, "mente_clara_db", "usuario_principal");
+
+    window.menteClaraCloud = {
+      async save(stateObj) {
+        await setDoc(MC_DOC_REF, {
+          updatedAt: new Date().toISOString(),
+          state: JSON.parse(JSON.stringify(stateObj))
+        }, { merge: true });
+      },
+      async load() {
+        const snap = await getDoc(MC_DOC_REF);
+        return snap.exists() ? snap.data().state : null;
+      }
+    };
+  </script>
+</body>
 </body>
 </html>
