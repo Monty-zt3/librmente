@@ -252,32 +252,37 @@
     </header>
 
     <!-- =================================================================== -->
-    <!-- PESTAÑAS DE NAVEGACIÓN UNIFICADA (ESCRITORIO)                       -->
+    <!-- PESTAÑAS DE NAVEGACIÓN UNIFICADA (ESCRITORIO: 6 PESTAÑAS)           -->
     <!-- =================================================================== -->
-    <nav aria-label="Secciones principales" class="hidden lg:flex items-center gap-2 p-1.5 rounded-2xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde shadow-xs">
-      <button onclick="switchMainTab('hoy')" id="deskTab_hoy" class="main-tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold bg-verdemar text-espuma transition flex items-center justify-center gap-2">
-        <i class="fa-solid fa-rocket"></i> Hoy y Misión Diaria
+    <nav aria-label="Secciones principales" class="hidden lg:flex items-center gap-1.5 p-1.5 rounded-2xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde shadow-xs">
+      <button onclick="switchMainTab('hoy')" id="deskTab_hoy" class="main-tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-semibold bg-verdemar text-espuma transition flex items-center justify-center gap-2">
+        <i class="fa-solid fa-compass"></i> Hoy
       </button>
-      <button onclick="switchMainTab('radar')" id="deskTab_radar" class="main-tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2">
-        <i class="fa-solid fa-shield-halved"></i> Radar y Acción Rápida
+      <button onclick="switchMainTab('habitos')" id="deskTab_habitos" class="main-tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2">
+        <i class="fa-solid fa-list-check"></i> Hábitos
       </button>
-      <button onclick="switchMainTab('bitacora')" id="deskTab_bitacora" class="main-tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2">
-        <i class="fa-solid fa-book-open"></i> Bitácora y Pilares
+      <button onclick="switchMainTab('agua')" id="deskTab_agua" class="main-tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2">
+        <i class="fa-solid fa-rocket"></i> Agua
       </button>
-      <button onclick="switchMainTab('progreso')" id="deskTab_progreso" class="main-tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2">
-        <i class="fa-solid fa-chart-line"></i> Progreso, Niveles e IA
+      <button onclick="switchMainTab('radar')" id="deskTab_radar" class="main-tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2">
+        <i class="fa-solid fa-shield-halved"></i> Radar
+      </button>
+      <button onclick="switchMainTab('bitacora')" id="deskTab_bitacora" class="main-tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2">
+        <i class="fa-solid fa-book-open"></i> Bitácora
+      </button>
+      <button onclick="switchMainTab('progreso')" id="deskTab_progreso" class="main-tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2">
+        <i class="fa-solid fa-chart-line"></i> Progreso
       </button>
     </nav>
 
     <!-- =================================================================== -->
-    <!-- VISTA 1: HOY (Estado, Tanque Hail Mary, Hábitos, 21 Días, Barreras) -->
+    <!-- VISTA 1: HOY (Estado Diario + Pulso Visual + Barreras Activas)      -->
     <!-- =================================================================== -->
     <div id="view_hoy" class="main-view-panel flex flex-col gap-[20px]">
 
-      <!-- FILA HERO: ESTADO HOY + TANQUE HAIL MARY -->
       <section class="grid grid-cols-1 lg:grid-cols-12 gap-[20px] items-stretch">
 
-        <!-- COLUMNA IZQUIERDA (7 cols): Días Limpios + Reflexión -->
+        <!-- COLUMNA IZQUIERDA (7 cols): Días Limpios + Reflexión + Check-in -->
         <div class="lg:col-span-7 card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm flex flex-col justify-between gap-4">
           <div>
             <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
@@ -351,146 +356,65 @@
           </div>
         </div>
 
-        <!-- COLUMNA DERECHA (5 cols): TANQUE DE HIDRATACIÓN PROJECT HAIL MARY -->
+        <!-- COLUMNA DERECHA (5 cols): PULSO VISUAL DEL DÍA (BARRAS DE HÁBITOS Y AGUA) -->
         <div class="lg:col-span-5 card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm flex flex-col justify-between gap-4">
-          <div class="flex items-start justify-between gap-2">
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-verdemar dark:text-pizarra">Soporte Vital · Nave Hail Mary</span>
-              <h2 class="font-serif text-lg font-semibold text-carbon dark:text-arena mt-0.5">Tanque de Astrofago</h2>
-              <p id="hmStatusSubtitle" class="text-xs text-piedra dark:text-crema/70 mt-0.5">Carga combustible para tu claridad mental.</p>
-            </div>
-            <button onclick="toggleWaterGoalEditor()" title="Editar meta mínima diaria" class="px-2.5 py-1.5 rounded-xl bg-arena dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-[11px] font-semibold text-piedra dark:text-crema hover:border-verdemar transition inline-flex items-center gap-1">
-              <i class="fa-solid fa-sliders"></i> Meta: <span id="hmGoalLabel">8</span>
-            </button>
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-verdemar dark:text-pizarra">Resumen Rápido</span>
+            <h2 class="font-serif text-lg font-semibold text-carbon dark:text-arena mt-0.5">Pulso del Día</h2>
+            <p class="text-xs text-piedra dark:text-crema/70 mt-0.5">Toca cualquier barra para ir directo a registrar.</p>
           </div>
 
-          <!-- Editor rápido de meta mínima -->
-          <div id="hmGoalEditorBox" class="hidden p-2.5 rounded-xl bg-arena/80 dark:bg-nocheFondo border border-crema dark:border-nocheBorde flex items-center justify-between gap-2 text-xs">
-            <label for="hmGoalInput" class="font-semibold">Meta mínima (vasos/día):</label>
-            <div class="flex items-center gap-1.5">
-              <input type="number" id="hmGoalInput" min="1" max="20" value="8" class="w-16 h-[34px] px-2 rounded-lg bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde text-center font-bold">
-              <button onclick="saveWaterGoal()" class="h-[34px] px-3 rounded-lg bg-verdemar text-espuma font-semibold">Guardar</button>
-            </div>
-          </div>
-
-          <!-- Silueta SVG de la Nave Project Hail Mary -->
-          <div class="flex items-center justify-center gap-5 my-auto py-1">
-            <div class="relative w-28 h-48 shrink-0 flex items-center justify-center">
-              <svg viewBox="0 0 120 210" class="w-full h-full drop-shadow-sm" aria-label="Silueta de la nave Hail Mary">
-                <defs>
-                  <clipPath id="hailMaryHullClip">
-                    <path d="M60 10 C42 28, 36 48, 36 68 L36 146 L26 164 L36 164 L36 174 L84 174 L84 164 L94 164 L84 146 L84 68 C84 48, 78 28, 60 10 Z" />
-                  </clipPath>
-                </defs>
-
-                <!-- Fondo vacío del casco -->
-                <path d="M60 10 C42 28, 36 48, 36 68 L36 146 L26 164 L36 164 L36 174 L84 174 L84 164 L94 164 L84 146 L84 68 C84 48, 78 28, 60 10 Z"
-                      class="fill-arena dark:fill-nocheFondo" />
-
-                <!-- Líquido / Astrofago dinámico -->
-                <g clip-path="url(#hailMaryHullClip)">
-                  <rect id="hmFuelRect" x="20" y="174" width="80" height="0" fill="#5C7675" />
-                  <line x1="36" y1="138" x2="84" y2="138" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3 3" />
-                  <line x1="36" y1="102" x2="84" y2="102" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3 3" />
-                  <line x1="36" y1="68" x2="84" y2="68" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" />
-                </g>
-
-                <!-- Contorno estructural de la nave Hail Mary -->
-                <path d="M60 10 C42 28, 36 48, 36 68 L36 146 L26 164 L36 164 L36 174 L84 174 L84 164 L94 164 L84 146 L84 68 C84 48, 78 28, 60 10 Z"
-                      fill="none" stroke="currentColor" stroke-width="2.5" class="text-carbon/70 dark:text-arena/80" />
-                <circle cx="60" cy="48" r="6" fill="none" stroke="currentColor" stroke-width="2" class="text-carbon/70 dark:text-arena/80" />
-                <path d="M41 174 L38 188 L50 188 L49 174 M55 174 L54 190 L66 190 L65 174 M71 174 L70 188 L82 188 L79 174"
-                      fill="none" stroke="currentColor" stroke-width="2" class="text-terracota dark:text-tierra" />
-                <g id="hmThrusterFlame" class="hidden">
-                  <path d="M40 190 L44 206 L48 190 M56 192 L60 210 L64 192 M72 190 L76 206 L80 190"
-                        fill="none" stroke="#D97706" stroke-width="2.2" stroke-linecap="round" />
-                </g>
-              </svg>
-            </div>
-
-            <div class="flex-1 space-y-2.5">
-              <div>
-                <div class="flex items-baseline gap-1.5">
-                  <span id="hmCupsCount" class="text-3xl sm:text-4xl font-bold tabular-nums text-carbon dark:text-arena">0</span>
-                  <span class="text-xs font-semibold text-piedra dark:text-crema/70">/ <span id="hmCupsTarget">8</span> vasos</span>
-                </div>
-                <span id="hmPercentLabel" class="text-xs font-bold text-verdemar dark:text-pizarra">0% de carga mínima</span>
+          <div class="space-y-3.5 my-auto">
+            <!-- Barra Visual de Hábitos + Top 3 Estrellas -->
+            <button onclick="switchMainTab('habitos')" class="w-full text-left p-4 rounded-2xl bg-arena/75 dark:bg-nocheFondo hover:bg-crema/50 dark:hover:bg-piedra/30 border border-crema dark:border-nocheBorde transition group">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold text-carbon dark:text-arena inline-flex items-center gap-2">
+                  <i class="fa-solid fa-list-check text-verdemar dark:text-pizarra"></i> Hábitos de Hoy
+                </span>
+                <span id="hoyHabitsBarLabel" class="text-xs font-bold tabular-nums text-verdemar dark:text-pizarra">0 / 0</span>
               </div>
-
-              <div id="hmBonusBadge" class="p-2.5 rounded-xl bg-arena/80 dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-[11px] text-piedra dark:text-crema/80 leading-snug">
-                Meta mínima: <strong>+12 XP</strong>.<br>Cada vaso extra suma <strong>+4 XP</strong> (máx. +4 extras).
+              <div class="w-full h-3 bg-crema/60 dark:bg-nocheTarjeta rounded-full overflow-hidden mb-2">
+                <div id="hoyHabitsBarFill" class="h-full bg-verdemar transition-all duration-300" style="width: 0%;"></div>
               </div>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2.5 pt-3 border-t border-crema/80 dark:border-nocheBorde">
-            <button onclick="adjustWaterCups(-1)" aria-label="Restar un vaso" class="h-[44px] px-4 rounded-xl bg-arena dark:bg-nocheFondo hover:bg-crema/70 border border-crema dark:border-nocheBorde text-xs font-bold text-carbon dark:text-arena transition">
-              -1
+              <div class="flex items-center justify-between text-[11px] text-piedra dark:text-crema/75">
+                <span id="hoyTop3StarsStatus">⭐ Top 3 Estrella: 0/3</span>
+                <span class="group-hover:translate-x-0.5 transition inline-flex items-center gap-1 font-semibold text-verdemar dark:text-pizarra">
+                  Abrir <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </span>
+              </div>
             </button>
-            <button onclick="adjustWaterCups(1)" class="h-[44px] flex-1 px-4 rounded-xl bg-verdemar hover:bg-verdemar/90 text-espuma text-xs font-semibold shadow-sm transition flex items-center justify-center gap-2">
-              <i class="fa-solid fa-droplet"></i>
-              <span>+1 Vaso de Agua</span>
+
+            <!-- Barra Visual de Agua (Tanque Hail Mary) -->
+            <button onclick="switchMainTab('agua')" class="w-full text-left p-4 rounded-2xl bg-arena/75 dark:bg-nocheFondo hover:bg-crema/50 dark:hover:bg-piedra/30 border border-crema dark:border-nocheBorde transition group">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold text-carbon dark:text-arena inline-flex items-center gap-2">
+                  <i class="fa-solid fa-droplet text-sky-600 dark:text-sky-400"></i> Tanque Hail Mary (Agua)
+                </span>
+                <span id="hoyWaterBarLabel" class="text-xs font-bold tabular-nums text-sky-700 dark:text-sky-300">0 / 8 vasos</span>
+              </div>
+              <div class="w-full h-3 bg-crema/60 dark:bg-nocheTarjeta rounded-full overflow-hidden mb-2">
+                <div id="hoyWaterBarFill" class="h-full bg-sky-600 transition-all duration-300" style="width: 0%;"></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-piedra dark:text-crema/75">
+                <span id="hoyWaterSubStatus">0% de carga mínima</span>
+                <span class="group-hover:translate-x-0.5 transition inline-flex items-center gap-1 font-semibold text-sky-700 dark:text-sky-300">
+                  Ir a Nave <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </span>
+              </div>
+            </button>
+
+            <!-- Mini-barra de Retos 21 Días si existen -->
+            <button onclick="switchMainTab('habitos')" class="w-full text-left p-3.5 rounded-2xl bg-arena/55 dark:bg-nocheFondo/70 hover:bg-crema/40 border border-crema/80 dark:border-nocheBorde transition flex items-center justify-between text-xs">
+              <span class="font-semibold text-carbon dark:text-arena inline-flex items-center gap-2">
+                <i class="fa-solid fa-fire text-terracota dark:text-tierra"></i> Incubadora 21 Días
+              </span>
+              <span id="hoyChallengesSummary" class="text-[11px] font-bold text-terracota dark:text-tierra">0 retos activos</span>
             </button>
           </div>
         </div>
       </section>
 
-      <!-- FILA 2 DE HOY: TRACKER DE HÁBITOS (3 ESTADOS) + INCUBADORA 21 DÍAS -->
-      <section class="grid grid-cols-1 lg:grid-cols-12 gap-[20px] items-start">
-
-        <!-- TRACKER DE HÁBITOS DIARIOS (7 cols) -->
-        <div class="lg:col-span-7 card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm">
-          <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-crema/80 dark:border-nocheBorde">
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-verdemar dark:text-pizarra">Entrenamiento Diario</span>
-              <h2 class="font-serif text-lg font-semibold text-carbon dark:text-arena mt-0.5">Hábitos de Hoy</h2>
-              <p class="text-[11px] text-piedra dark:text-crema/70">Marca <strong>✓</strong> Hecho, <strong>✗</strong> No hecho o <strong>🕒</strong> Otro día. Pulsa ⭐ para fijar tu Hábito Ancla.</p>
-            </div>
-            <button onclick="openNewHabitModal('permanent')" class="h-[36px] px-3.5 rounded-xl bg-verdemar hover:bg-verdemar/90 text-espuma text-xs font-semibold shadow-xs transition inline-flex items-center gap-1.5 shrink-0">
-              <i class="fa-solid fa-plus"></i> Nuevo Hábito
-            </button>
-          </div>
-
-          <div id="todayHabitsList" class="space-y-2.5"></div>
-        </div>
-
-        <!-- INCUBADORA DE 21 DÍAS + HIELITOS ADAPTATIVOS (5 cols) -->
-        <div class="lg:col-span-5 card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm">
-          <div class="flex flex-wrap items-start justify-between gap-2 pb-3 mb-4 border-b border-crema/80 dark:border-nocheBorde">
-            <div>
-              <span class="text-[10px] font-bold uppercase tracking-widest text-terracota dark:text-tierra">Forja de Hábitos Nuevos</span>
-              <h2 class="font-serif text-lg font-semibold text-carbon dark:text-arena mt-0.5">Incubadora 21 Días</h2>
-            </div>
-            <button onclick="openNewHabitModal('challenge21')" class="h-[34px] px-3 rounded-xl bg-terracota/15 hover:bg-terracota hover:text-espuma text-terracota dark:text-tierra text-xs font-semibold transition inline-flex items-center gap-1 shrink-0">
-              <i class="fa-solid fa-fire text-[10px]"></i> Reto 21d
-            </button>
-          </div>
-
-          <!-- Banco de Hielitos Mensuales Calibrados -->
-          <div class="p-3.5 rounded-2xl bg-arena/80 dark:bg-nocheFondo border border-crema dark:border-nocheBorde mb-4">
-            <div class="flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-sky-500/15 text-sky-700 dark:text-sky-300 flex items-center justify-center text-base shrink-0">
-                  <i class="fa-solid fa-snowflake"></i>
-                </div>
-                <div>
-                  <span class="text-xs font-bold text-carbon dark:text-arena block">
-                    Hielitos este mes: <span id="iceCubeCount" class="text-sky-700 dark:text-sky-300 text-sm">2</span> / <span id="iceCubeQuota">2</span>
-                  </span>
-                  <span id="iceCubeCalibrationNote" class="text-[10px] text-piedra dark:text-crema/70 block">Protector automático de racha</span>
-                </div>
-              </div>
-              <button onclick="buyIceCubeWithXp()" class="px-2.5 py-1.5 rounded-xl bg-espuma dark:bg-nocheTarjeta hover:bg-sky-500/15 border border-crema dark:border-nocheBorde text-[11px] font-semibold text-carbon dark:text-arena transition shrink-0" title="Forjar un hielito extra usando 40 XP acumulados">
-                +1 <i class="fa-solid fa-snowflake text-sky-500"></i> (40 XP)
-              </button>
-            </div>
-          </div>
-
-          <div id="challenges21List" class="space-y-3"></div>
-        </div>
-      </section>
-
-      <!-- FILA 3 DE HOY: BARRERAS ACTIVAS (CHECKLIST DE PROTECCIÓN DIARIA) -->
+      <!-- BARRERAS ACTIVAS (CHECKLIST DE PROTECCIÓN DIARIA) -->
       <section id="barriersSection" class="card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 mb-4 border-b border-crema/80 dark:border-nocheBorde">
           <div>
@@ -523,7 +447,177 @@
     </div>
 
     <!-- =================================================================== -->
-    <!-- VISTA 2: RADAR Y ACCIÓN RÁPIDA                                      -->
+    <!-- VISTA 2: HÁBITOS (Lista dedicada + Top 3 Estrellas + Orden + 21d)   -->
+    <!-- =================================================================== -->
+    <div id="view_habitos" class="main-view-panel hidden flex flex-col gap-[20px]">
+
+      <!-- TARJETA PRINCIPAL: HÁBITOS DE HOY -->
+      <section class="card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-crema/80 dark:border-nocheBorde">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-verdemar dark:text-pizarra">Disciplina Diaria</span>
+            <h2 class="font-serif text-xl font-semibold text-carbon dark:text-arena mt-0.5">Mis Hábitos de Hoy</h2>
+            <p class="text-xs text-piedra dark:text-crema/70 mt-0.5">
+              Marca hasta <strong>3 estrellas (⭐)</strong> para fijar tu Top 3 Prioritario arriba (+15 XP extra al completar los 3).
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="top3CounterPill" class="px-2.5 py-1 rounded-xl bg-amber-500/15 text-amber-800 dark:text-amber-300 text-xs font-bold">
+              ⭐ 0/3
+            </span>
+            <button id="toggleHabitReorderBtn" onclick="toggleHabitReorderMode()" class="h-[38px] px-3.5 rounded-xl bg-arena dark:bg-nocheFondo hover:bg-crema/70 border border-crema dark:border-nocheBorde text-xs font-semibold text-carbon dark:text-arena transition inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-arrows-up-down"></i>
+              <span>Ordenar</span>
+            </button>
+            <button onclick="openNewHabitModal('permanent')" class="h-[38px] px-4 rounded-xl bg-verdemar hover:bg-verdemar/90 text-espuma text-xs font-semibold shadow-xs transition inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-plus"></i> Nuevo Hábito
+            </button>
+          </div>
+        </div>
+
+        <div id="todayHabitsList" class="space-y-2.5"></div>
+      </section>
+
+      <!-- ABAJO: INCUBADORA DE 21 DÍAS + HIELITOS ADAPTATIVOS -->
+      <section class="card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 mb-4 border-b border-crema/80 dark:border-nocheBorde">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-terracota dark:text-tierra">Forja de Hábitos Nuevos</span>
+            <h2 class="font-serif text-lg font-semibold text-carbon dark:text-arena mt-0.5">Incubadora de 21 Días</h2>
+            <p class="text-xs text-piedra dark:text-crema/70 mt-0.5">
+              Sostén un hábito nuevo durante 21 días consecutivos para graduarlo a tu lista permanente.
+            </p>
+          </div>
+          <button onclick="openNewHabitModal('challenge21')" class="h-[38px] px-4 rounded-xl bg-terracota hover:bg-terracota/90 text-espuma text-xs font-semibold shadow-xs transition inline-flex items-center gap-1.5 shrink-0">
+            <i class="fa-solid fa-fire"></i> Agregar Reto 21 Días
+          </button>
+        </div>
+
+        <!-- Banco de Hielitos Mensuales Calibrados -->
+        <div class="p-3.5 rounded-2xl bg-arena/80 dark:bg-nocheFondo border border-crema dark:border-nocheBorde mb-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-sky-500/15 text-sky-700 dark:text-sky-300 flex items-center justify-center text-lg shrink-0">
+                <i class="fa-solid fa-snowflake"></i>
+              </div>
+              <div>
+                <span class="text-xs sm:text-sm font-bold text-carbon dark:text-arena block">
+                  Hielitos este mes: <span id="iceCubeCount" class="text-sky-700 dark:text-sky-300">2</span> / <span id="iceCubeQuota">2</span>
+                </span>
+                <span id="iceCubeCalibrationNote" class="text-[11px] text-piedra dark:text-crema/70 block">Protector automático de racha</span>
+              </div>
+            </div>
+            <button onclick="buyIceCubeWithXp()" class="px-3.5 py-2 rounded-xl bg-espuma dark:bg-nocheTarjeta hover:bg-sky-500/15 border border-crema dark:border-nocheBorde text-xs font-semibold text-carbon dark:text-arena transition shrink-0" title="Forjar un hielito extra usando 40 XP acumulados">
+              +1 <i class="fa-solid fa-snowflake text-sky-500"></i> (Canjear 40 XP)
+            </button>
+          </div>
+        </div>
+
+        <div id="challenges21List" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      </section>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- VISTA 3: AGUA (Tanque Project Hail Mary + Historial 7 días)         -->
+    <!-- =================================================================== -->
+    <div id="view_agua" class="main-view-panel hidden flex flex-col gap-[20px]">
+
+      <section class="card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm">
+        <div class="flex flex-wrap items-start justify-between gap-3 pb-4 mb-5 border-b border-crema/80 dark:border-nocheBorde">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-verdemar dark:text-pizarra">Soporte Vital · Nave Hail Mary</span>
+            <h2 class="font-serif text-xl font-semibold text-carbon dark:text-arena mt-0.5">Tanque de Astrofago (Hidratación)</h2>
+            <p id="hmStatusSubtitle" class="text-xs text-piedra dark:text-crema/70 mt-0.5">Carga combustible para tu claridad mental.</p>
+          </div>
+          <button onclick="toggleWaterGoalEditor()" title="Editar meta mínima diaria" class="px-3.5 py-2 rounded-xl bg-arena dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-xs font-semibold text-piedra dark:text-crema hover:border-verdemar transition inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-sliders"></i> Meta mínima: <span id="hmGoalLabel">8</span> vasos
+          </button>
+        </div>
+
+        <!-- Editor rápido de meta mínima -->
+        <div id="hmGoalEditorBox" class="hidden mb-5 p-3.5 rounded-2xl bg-arena/80 dark:bg-nocheFondo border border-crema dark:border-nocheBorde flex flex-wrap items-center justify-between gap-3 text-xs">
+          <label for="hmGoalInput" class="font-semibold text-carbon dark:text-arena">Define tu meta mínima diaria (vasos):</label>
+          <div class="flex items-center gap-2">
+            <input type="number" id="hmGoalInput" min="1" max="20" value="8" class="w-20 h-[38px] px-2 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde text-center font-bold">
+            <button onclick="saveWaterGoal()" class="h-[38px] px-4 rounded-xl bg-verdemar text-espuma font-semibold">Guardar meta</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center py-2">
+          <!-- Silueta SVG Protagonista de la Nave Project Hail Mary -->
+          <div class="md:col-span-5 flex justify-center">
+            <div class="relative w-36 h-60 flex items-center justify-center">
+              <svg viewBox="0 0 120 210" class="w-full h-full drop-shadow-sm" aria-label="Silueta de la nave Hail Mary">
+                <defs>
+                  <clipPath id="hailMaryHullClip">
+                    <path d="M60 10 C42 28, 36 48, 36 68 L36 146 L26 164 L36 164 L36 174 L84 174 L84 164 L94 164 L84 146 L84 68 C84 48, 78 28, 60 10 Z" />
+                  </clipPath>
+                </defs>
+
+                <path d="M60 10 C42 28, 36 48, 36 68 L36 146 L26 164 L36 164 L36 174 L84 174 L84 164 L94 164 L84 146 L84 68 C84 48, 78 28, 60 10 Z"
+                      class="fill-arena dark:fill-nocheFondo" />
+
+                <g clip-path="url(#hailMaryHullClip)">
+                  <rect id="hmFuelRect" x="20" y="174" width="80" height="0" fill="#5C7675" />
+                  <line x1="36" y1="138" x2="84" y2="138" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3 3" />
+                  <line x1="36" y1="102" x2="84" y2="102" stroke="rgba(255,255,255,0.22)" stroke-width="1" stroke-dasharray="3 3" />
+                  <line x1="36" y1="68" x2="84" y2="68" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" />
+                </g>
+
+                <path d="M60 10 C42 28, 36 48, 36 68 L36 146 L26 164 L36 164 L36 174 L84 174 L84 164 L94 164 L84 146 L84 68 C84 48, 78 28, 60 10 Z"
+                      fill="none" stroke="currentColor" stroke-width="2.5" class="text-carbon/70 dark:text-arena/80" />
+                <circle cx="60" cy="48" r="6" fill="none" stroke="currentColor" stroke-width="2" class="text-carbon/70 dark:text-arena/80" />
+                <path d="M41 174 L38 188 L50 188 L49 174 M55 174 L54 190 L66 190 L65 174 M71 174 L70 188 L82 188 L79 174"
+                      fill="none" stroke="currentColor" stroke-width="2" class="text-terracota dark:text-tierra" />
+                <g id="hmThrusterFlame" class="hidden">
+                  <path d="M40 190 L44 206 L48 190 M56 192 L60 210 L64 192 M72 190 L76 206 L80 190"
+                        fill="none" stroke="#D97706" stroke-width="2.2" stroke-linecap="round" />
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Controles y Métricas de Hidratación -->
+          <div class="md:col-span-7 space-y-4">
+            <div>
+              <div class="flex items-baseline gap-2">
+                <span id="hmCupsCount" class="text-5xl sm:text-6xl font-bold tabular-nums text-carbon dark:text-arena">0</span>
+                <span class="text-sm font-semibold text-piedra dark:text-crema/70">/ <span id="hmCupsTarget">8</span> vasos hoy</span>
+              </div>
+              <span id="hmPercentLabel" class="text-sm font-bold text-verdemar dark:text-pizarra mt-1 block">0% de carga mínima</span>
+            </div>
+
+            <div id="hmBonusBadge" class="p-3.5 rounded-2xl bg-arena/80 dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-xs text-piedra dark:text-crema/85 leading-relaxed">
+              • Al alcanzar tu meta mínima ganas <strong>+12 XP</strong> de soporte vital.<br>
+              • Cada vaso adicional activa el modo <strong>Propulsión Astrofago</strong> y suma <strong>+4 XP</strong> (máx. +4 vasos extra).
+            </div>
+
+            <div class="flex items-center gap-3 pt-1">
+              <button onclick="adjustWaterCups(-1)" aria-label="Restar un vaso" class="h-[48px] px-5 rounded-xl bg-arena dark:bg-nocheFondo hover:bg-crema/70 border border-crema dark:border-nocheBorde text-sm font-bold text-carbon dark:text-arena transition">
+                -1
+              </button>
+              <button onclick="adjustWaterCups(1)" class="h-[48px] flex-1 px-5 rounded-xl bg-verdemar hover:bg-verdemar/90 text-espuma text-sm font-semibold shadow-sm transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-droplet"></i>
+                <span>+1 Vaso de Agua</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Historial Visual de los últimos 7 días -->
+        <div class="mt-6 pt-5 border-t border-crema/80 dark:border-nocheBorde">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-piedra dark:text-crema/70">Constancia de Hidratación (Últimos 7 días)</span>
+            <span id="water7DaysAvgLabel" class="text-xs font-semibold text-verdemar dark:text-pizarra">Promedio: 0 vasos/día</span>
+          </div>
+          <div id="water7DaysChart" class="grid grid-cols-7 gap-2.5"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- VISTA 4: RADAR Y ACCIÓN RÁPIDA                                      -->
     <!-- =================================================================== -->
     <div id="view_radar" class="main-view-panel hidden flex flex-col gap-[20px]">
 
@@ -753,63 +847,25 @@
     </div>
 
     <!-- =================================================================== -->
-    <!-- VISTA 3: BITÁCORA Y PILARES                                         -->
+    <!-- VISTA 5: BITÁCORA Y PILARES EDITABLES                               -->
     <!-- =================================================================== -->
     <div id="view_bitacora" class="main-view-panel hidden flex flex-col gap-[20px]">
       <section class="grid grid-cols-1 lg:grid-cols-2 gap-[20px] items-stretch">
 
-        <!-- MIS 4 PILARES Y FRASES PROPIAS -->
+        <!-- MIS PILARES EDITABLES Y FRASES PROPIAS -->
         <div class="card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm flex flex-col justify-between gap-4">
           <div>
-            <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center justify-between gap-2 mb-3">
               <div>
                 <span class="text-xs font-bold uppercase tracking-wider text-verdemar dark:text-pizarra">Ancla de Propósito</span>
-                <h2 class="font-serif text-lg font-semibold text-carbon dark:text-arena mt-0.5">Mis 4 Pilares y Mi Por Qué</h2>
+                <h2 class="font-serif text-lg font-semibold text-carbon dark:text-arena mt-0.5">Mis Pilares y Mi Por Qué</h2>
               </div>
-              <i class="fa-solid fa-anchor text-verdemar dark:text-pizarra text-base"></i>
+              <button onclick="openPillarEditorModal()" class="h-[34px] px-3 rounded-xl bg-verdemar/15 hover:bg-verdemar hover:text-espuma text-verdemar dark:text-pizarra text-xs font-semibold transition inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-pen-to-square"></i> Editar Pilares
+              </button>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-              <div class="p-3.5 rounded-xl bg-arena/70 dark:bg-nocheFondo border border-crema/80 dark:border-nocheBorde">
-                <div class="flex items-center gap-2 text-xs font-bold text-carbon dark:text-arena mb-1">
-                  <i class="fa-solid fa-graduation-cap text-verdemar dark:text-pizarra"></i>
-                  <span>Universidad</span>
-                </div>
-                <p class="text-xs text-piedra dark:text-crema/75 leading-relaxed">
-                  Claridad mental sostenida y disciplina para rendir al máximo en mis estudios.
-                </p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-arena/70 dark:bg-nocheFondo border border-crema/80 dark:border-nocheBorde">
-                <div class="flex items-center gap-2 text-xs font-bold text-carbon dark:text-arena mb-1">
-                  <i class="fa-solid fa-microphone text-tierra"></i>
-                  <span>Clases y Batallas de Freestyle</span>
-                </div>
-                <p class="text-xs text-piedra dark:text-crema/75 leading-relaxed">
-                  Agudeza verbal, velocidad mental y energía creativa pura en cada tarima.
-                </p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-arena/70 dark:bg-nocheFondo border border-crema/80 dark:border-nocheBorde">
-                <div class="flex items-center gap-2 text-xs font-bold text-carbon dark:text-arena mb-1">
-                  <i class="fa-solid fa-brain text-verdemar dark:text-pizarra"></i>
-                  <span>Claridad Mental y Autoestima</span>
-                </div>
-                <p class="text-xs text-piedra dark:text-crema/75 leading-relaxed">
-                  Confianza auténtica nacida de cumplir mis acuerdos y transformar energía en arte.
-                </p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-arena/70 dark:bg-nocheFondo border border-crema/80 dark:border-nocheBorde">
-                <div class="flex items-center gap-2 text-xs font-bold text-carbon dark:text-arena mb-1">
-                  <i class="fa-solid fa-users text-tierra"></i>
-                  <span>Presencia en Conversaciones</span>
-                </div>
-                <p class="text-xs text-piedra dark:text-crema/75 leading-relaxed">
-                  Escuchar y conectar de verdad con las personas, sin dispersión ni niebla mental.
-                </p>
-              </div>
-            </div>
+            <div id="customPillarsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4"></div>
           </div>
 
           <div class="pt-3 border-t border-crema/80 dark:border-nocheBorde">
@@ -879,7 +935,7 @@
     </div>
 
     <!-- =================================================================== -->
-    <!-- VISTA 4: PROGRESO, NIVELES POR PILAR, ESTADÍSTICAS E INSIGNIAS      -->
+    <!-- VISTA 6: PROGRESO, NIVELES POR PILAR, ESTADÍSTICAS E INSIGNIAS      -->
     <!-- =================================================================== -->
     <div id="view_progreso" class="main-view-panel hidden flex flex-col gap-[20px]">
 
@@ -906,7 +962,7 @@
         <div id="pillarLevelsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5"></div>
       </section>
 
-      <!-- ESTADÍSTICAS DIARIAS DE HÁBITOS (ESTILO HÁBITOS NINJA) -->
+      <!-- ESTADÍSTICAS DIARIAS DE HÁBITOS -->
       <section class="card-transition bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-[16px] p-[24px] shadow-sm">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 mb-4 border-b border-crema/80 dark:border-nocheBorde">
           <div>
@@ -946,30 +1002,97 @@
   </main>
 
   <!-- ===================================================================== -->
-  <!-- BARRA DE NAVEGACIÓN INFERIOR FIJA PARA MÓVIL (< 1024px)               -->
+  <!-- BARRA DE NAVEGACIÓN INFERIOR FIJA PARA MÓVIL (5 BOTONES PRINCIPALES)  -->
   <!-- ===================================================================== -->
-  <nav id="mobileBottomNav" aria-label="Navegación móvil" class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-espuma/95 dark:bg-nocheTarjeta/95 backdrop-blur-md border-t border-crema dark:border-nocheBorde px-2 py-1.5 pb-[max(6px,env(safe-area-inset-bottom))] grid grid-cols-4 gap-1 shadow-lg">
-    <button onclick="switchMainTab('hoy')" id="mobTab_hoy" class="mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-verdemar dark:text-pizarra font-bold text-[11px]">
-      <i class="fa-solid fa-rocket text-base mb-0.5"></i>
+  <nav id="mobileBottomNav" aria-label="Navegación móvil" class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-espuma/95 dark:bg-nocheTarjeta/95 backdrop-blur-md border-t border-crema dark:border-nocheBorde px-1.5 py-1.5 pb-[max(6px,env(safe-area-inset-bottom))] grid grid-cols-5 gap-1 shadow-lg">
+    <button onclick="switchMainTab('hoy')" id="mobTab_hoy" class="mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-verdemar dark:text-pizarra bg-verdemar/10 font-bold text-[11px]">
+      <i class="fa-solid fa-compass text-base mb-0.5"></i>
       <span>Hoy</span>
+    </button>
+    <button onclick="switchMainTab('habitos')" id="mobTab_habitos" class="mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-piedra dark:text-crema/70 font-medium text-[11px]">
+      <i class="fa-solid fa-list-check text-base mb-0.5"></i>
+      <span>Hábitos</span>
+    </button>
+    <button onclick="switchMainTab('agua')" id="mobTab_agua" class="mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-piedra dark:text-crema/70 font-medium text-[11px]">
+      <i class="fa-solid fa-rocket text-base mb-0.5"></i>
+      <span>Agua</span>
     </button>
     <button onclick="switchMainTab('radar')" id="mobTab_radar" class="mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-piedra dark:text-crema/70 font-medium text-[11px]">
       <i class="fa-solid fa-shield-halved text-base mb-0.5"></i>
       <span>Radar</span>
     </button>
-    <button onclick="switchMainTab('bitacora')" id="mobTab_bitacora" class="mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-piedra dark:text-crema/70 font-medium text-[11px]">
-      <i class="fa-solid fa-book-open text-base mb-0.5"></i>
-      <span>Bitácora</span>
-    </button>
-    <button onclick="switchMainTab('progreso')" id="mobTab_progreso" class="mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-piedra dark:text-crema/70 font-medium text-[11px]">
-      <i class="fa-solid fa-chart-line text-base mb-0.5"></i>
-      <span>Progreso</span>
+    <button onclick="openMobileMoreMenu()" id="mobTab_mas" class="mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-piedra dark:text-crema/70 font-medium text-[11px]">
+      <i class="fa-solid fa-ellipsis text-base mb-0.5"></i>
+      <span>Más</span>
     </button>
   </nav>
+
+  <!-- MODAL SELECTOR "MÁS" EN MÓVIL (Bitácora y Progreso) -->
+  <div id="mobileMoreModal" class="fixed inset-0 z-50 hidden bg-carbon/70 backdrop-blur-sm flex items-end justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="closeMobileMoreMenu()" aria-label="Cerrar" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-arena dark:bg-nocheFondo text-piedra dark:text-crema flex items-center justify-center">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="font-serif text-lg font-semibold text-carbon dark:text-arena mb-3">Más secciones</h3>
+      <div class="grid grid-cols-1 gap-2.5">
+        <button onclick="closeMobileMoreMenu(); switchMainTab('bitacora');" class="p-3.5 rounded-2xl bg-arena dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-left font-semibold flex items-center gap-3">
+          <i class="fa-solid fa-book-open text-verdemar dark:text-pizarra w-5"></i>
+          <div>
+            <span class="block text-sm text-carbon dark:text-arena">Bitácora y Mis Pilares</span>
+            <span class="text-[11px] text-piedra dark:text-crema/70 font-normal">Diario, transcripciones OCR y edición de pilares</span>
+          </div>
+        </button>
+        <button onclick="closeMobileMoreMenu(); switchMainTab('progreso');" class="p-3.5 rounded-2xl bg-arena dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-left font-semibold flex items-center gap-3">
+          <i class="fa-solid fa-chart-line text-terracota dark:text-tierra w-5"></i>
+          <div>
+            <span class="block text-sm text-carbon dark:text-arena">Progreso, Niveles e Insignias</span>
+            <span class="text-[11px] text-piedra dark:text-crema/70 font-normal">XP por pilar, auditoría de hábitos y logros</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ===================================================================== -->
   <!-- MODALES INTERACTIVOS                                                  -->
   <!-- ===================================================================== -->
+
+  <!-- MODAL GESTOR DE PILARES PERSONALIZABLES -->
+  <div id="pillarEditorModal" class="fixed inset-0 z-50 hidden bg-carbon/70 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="pillarEditorTitle">
+    <div class="bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[92vh] overflow-y-auto">
+      <button onclick="closePillarEditorModal()" aria-label="Cerrar" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-arena dark:bg-nocheFondo text-piedra dark:text-crema flex items-center justify-center hover:bg-crema transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <span class="text-[10px] font-bold uppercase tracking-widest text-verdemar dark:text-pizarra">Identidad y Enfoque</span>
+      <h3 id="pillarEditorTitle" class="font-serif text-xl font-semibold text-carbon dark:text-arena mt-0.5 mb-1">Personalizar Mis Pilares</h3>
+      <p class="text-xs text-piedra dark:text-crema/70 mb-4">Edita tus pilares actuales o crea nuevos. Se sincronizan automáticamente con tus hábitos, niveles de XP y análisis con Gemini.</p>
+
+      <!-- Lista de pilares existentes para editar o eliminar -->
+      <div id="pillarEditorList" class="space-y-3 mb-5"></div>
+
+      <!-- Formulario para añadir un nuevo pilar -->
+      <div class="p-4 rounded-2xl bg-arena/80 dark:bg-nocheFondo border border-crema dark:border-nocheBorde space-y-3 text-xs">
+        <span class="font-bold text-carbon dark:text-arena block">+ Agregar nuevo Pilar</span>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <select id="newPillarIcon" aria-label="Icono del pilar" class="p-2.5 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde">
+            <option value="fa-graduation-cap">🎓 Estudio / Uni</option>
+            <option value="fa-microphone">🎤 Arte / Freestyle</option>
+            <option value="fa-brain">🧠 Mente / Enfoque</option>
+            <option value="fa-users">🤝 Relaciones</option>
+            <option value="fa-dumbbell">💪 Cuerpo / Salud</option>
+            <option value="fa-sparkles">✨ Espíritu / Propósito</option>
+            <option value="fa-briefcase">💼 Proyecto / Trabajo</option>
+          </select>
+          <input type="text" id="newPillarLabel" placeholder="Nombre del pilar..." class="sm:col-span-2 p-2.5 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde">
+        </div>
+        <input type="text" id="newPillarDesc" placeholder="¿Por qué es importante este pilar para ti?" class="w-full p-2.5 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde">
+        <button onclick="addNewCustomPillar()" class="w-full py-2.5 rounded-xl bg-verdemar hover:bg-verdemar/90 text-espuma font-semibold transition">
+          Añadir Pilar
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL NUEVO HÁBITO O RETO DE 21 DÍAS -->
   <div id="newHabitModal" class="fixed inset-0 z-50 hidden bg-carbon/70 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="newHabitModalTitle">
@@ -1014,22 +1137,11 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label for="habitPrimaryPillar" class="block font-semibold mb-1.5">Pilar Principal</label>
-            <select id="habitPrimaryPillar" class="w-full p-2.5 rounded-xl bg-arena dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-carbon dark:text-arena">
-              <option value="universidad">🎓 Universidad</option>
-              <option value="freestyle">🎤 Freestyle</option>
-              <option value="claridad">🧠 Claridad Mental</option>
-              <option value="presencia">🤝 Presencia</option>
-            </select>
+            <select id="habitPrimaryPillar" class="w-full p-2.5 rounded-xl bg-arena dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-carbon dark:text-arena"></select>
           </div>
           <div>
             <label for="habitSecondaryPillar" class="block font-semibold mb-1.5">Pilar Secundario (Opc.)</label>
-            <select id="habitSecondaryPillar" class="w-full p-2.5 rounded-xl bg-arena dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-carbon dark:text-arena">
-              <option value="">— Ninguno —</option>
-              <option value="universidad">🎓 Universidad</option>
-              <option value="freestyle">🎤 Freestyle</option>
-              <option value="claridad">🧠 Claridad Mental</option>
-              <option value="presencia">🤝 Presencia</option>
-            </select>
+            <select id="habitSecondaryPillar" class="w-full p-2.5 rounded-xl bg-arena dark:bg-nocheFondo border border-crema dark:border-nocheBorde text-carbon dark:text-arena"></select>
           </div>
         </div>
 
@@ -1491,7 +1603,7 @@
         </select>
       </div>
       <p class="text-xs text-piedra dark:text-crema/70 mb-4">
-        Cruza tus hábitos nativos, hidratación Hail Mary, retos de 21 días, cuaderno OCR e impulsos sin inventar nada.
+        Cruza tus hábitos nativos, Top 3 Estrella, hidratación Hail Mary, retos de 21 días, cuaderno OCR e impulsos sin inventar nada.
       </p>
 
       <!-- OPCIÓN RÁPIDA: RESUMEN CON IA DIRECTAMENTE EN LA PÁGINA -->
@@ -1596,12 +1708,32 @@
       'Aburrimiento / Cansancio'
     ];
 
-    const PILLAR_META = {
-      universidad: { label: 'Universidad', icon: 'fa-graduation-cap', color: 'text-verdemar dark:text-pizarra' },
-      freestyle: { label: 'Freestyle', icon: 'fa-microphone', color: 'text-tierra' },
-      claridad: { label: 'Claridad Mental', icon: 'fa-brain', color: 'text-verdemar dark:text-pizarra' },
-      presencia: { label: 'Presencia', icon: 'fa-users', color: 'text-tierra' }
-    };
+    const DEFAULT_PILLARS = [
+      {
+        id: 'universidad',
+        label: 'Universidad',
+        icon: 'fa-graduation-cap',
+        desc: 'Claridad mental sostenida y disciplina para rendir al máximo en mis estudios.'
+      },
+      {
+        id: 'freestyle',
+        label: 'Clases y Batallas de Freestyle',
+        icon: 'fa-microphone',
+        desc: 'Agudeza verbal, velocidad mental y energía creativa pura en cada tarima.'
+      },
+      {
+        id: 'claridad',
+        label: 'Claridad Mental y Autoestima',
+        icon: 'fa-brain',
+        desc: 'Confianza auténtica nacida de cumplir mis acuerdos y transformar energía en arte.'
+      },
+      {
+        id: 'presencia',
+        label: 'Presencia en Conversaciones',
+        icon: 'fa-users',
+        desc: 'Escuchar y conectar de verdad con las personas, sin dispersión ni niebla mental.'
+      }
+    ];
 
     function getDefaultState() {
       const now = new Date();
@@ -1621,9 +1753,10 @@
         dailyLogs: dailyLogs,
         customRelapseTriggers: [],
         xpTotal: 0,
+        pillars: JSON.parse(JSON.stringify(DEFAULT_PILLARS)),
         pillarXp: { universidad: 0, freestyle: 0, claridad: 0, presencia: 0 },
         habits: [],
-        anchorHabitId: null,
+        top3BonusClaimedDates: {},
         challenges21: [],
         iceCubes: {
           currentMonth: getCurrentMonthKey(now),
@@ -1706,6 +1839,7 @@
 
     let appState = loadState();
     let currentMainTab = 'hoy';
+    let habitReorderMode = false;
     let currentReflectionIndex = appState.reflectionCards.length > 0
       ? Math.floor(Math.random() * appState.reflectionCards.length)
       : 0;
@@ -1732,7 +1866,20 @@
         if (!Array.isArray(merged.activeBarriers)) merged.activeBarriers = [];
         if (!Array.isArray(merged.habits)) merged.habits = [];
         if (!Array.isArray(merged.challenges21)) merged.challenges21 = [];
-        if (!merged.pillarXp) merged.pillarXp = { universidad: 0, freestyle: 0, claridad: 0, presencia: 0 };
+        if (!Array.isArray(merged.pillars) || merged.pillars.length === 0) {
+          merged.pillars = JSON.parse(JSON.stringify(DEFAULT_PILLARS));
+        }
+        if (!merged.pillarXp) merged.pillarXp = {};
+        merged.pillars.forEach(p => {
+          if (merged.pillarXp[p.id] === undefined) merged.pillarXp[p.id] = 0;
+        });
+        // Migrar antiguo anchorHabitId único hacia isStarred si existía
+        if (merged.anchorHabitId) {
+          const oldAnchor = merged.habits.find(h => h.id === merged.anchorHabitId);
+          if (oldAnchor) oldAnchor.isStarred = true;
+          delete merged.anchorHabitId;
+        }
+        if (!merged.top3BonusClaimedDates) merged.top3BonusClaimedDates = {};
         if (!merged.waterSettings) merged.waterSettings = { minGoal: 8, maxExtra: 4 };
         if (!merged.waterLogs) merged.waterLogs = {};
         if (!merged.iceCubes) {
@@ -1773,7 +1920,7 @@
     }
 
     // =========================================================================
-    // 2B. NAVEGACIÓN DE 4 PESTAÑAS (ESCRITORIO + BARRA INFERIOR MÓVIL)
+    // 2B. NAVEGACIÓN UNIFICADA (6 PESTAÑAS EN PC / 5 EN MÓVIL)
     // =========================================================================
     function switchMainTab(tabName) {
       currentMainTab = tabName;
@@ -1781,18 +1928,21 @@
       const activePanel = document.getElementById(`view_${tabName}`);
       if (activePanel) activePanel.classList.remove('hidden');
 
+      // Estilo escritorio
       document.querySelectorAll('.main-tab-btn').forEach(btn => {
-        btn.className = "main-tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2";
+        btn.className = "main-tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-medium text-piedra dark:text-crema/80 hover:bg-arena/70 dark:hover:bg-nocheFondo transition flex items-center justify-center gap-2";
       });
       const deskBtn = document.getElementById(`deskTab_${tabName}`);
       if (deskBtn) {
-        deskBtn.className = "main-tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold bg-verdemar text-espuma transition flex items-center justify-center gap-2 shadow-xs";
+        deskBtn.className = "main-tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-semibold bg-verdemar text-espuma transition flex items-center justify-center gap-2 shadow-xs";
       }
 
+      // Estilo móvil (5 botones: Hoy, Hábitos, Agua, Radar, Más)
       document.querySelectorAll('.mob-tab-btn').forEach(btn => {
         btn.className = "mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-piedra dark:text-crema/70 font-medium text-[11px]";
       });
-      const mobBtn = document.getElementById(`mobTab_${tabName}`);
+      const mobTargetId = (tabName === 'bitacora' || tabName === 'progreso') ? 'mobTab_mas' : `mobTab_${tabName}`;
+      const mobBtn = document.getElementById(mobTargetId);
       if (mobBtn) {
         mobBtn.className = "mob-tab-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-verdemar dark:text-pizarra bg-verdemar/10 font-bold text-[11px]";
       }
@@ -1801,18 +1951,158 @@
         renderPillarLevels();
         renderHabitStatsPanel();
       }
+      if (tabName === 'agua') {
+        renderWaterTank();
+      }
+      if (tabName === 'habitos') {
+        renderTodayHabits();
+        renderChallenges21();
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function openMobileMoreMenu() {
+      document.getElementById('mobileMoreModal').classList.remove('hidden');
+    }
+
+    function closeMobileMoreMenu() {
+      document.getElementById('mobileMoreModal').classList.add('hidden');
+    }
+
     // =========================================================================
-    // 3. SISTEMA DE NIVELES / XP Y PILARES
+    // 3. SISTEMA DE PILARES EDITABLES, NIVELES Y XP
     // =========================================================================
+    function getPillarById(pillarId) {
+      return appState.pillars.find(p => p.id === pillarId) || appState.pillars[0] || {
+        id: 'general', label: 'General', icon: 'fa-compass', desc: ''
+      };
+    }
+
+    function renderCustomPillars() {
+      const grid = document.getElementById('customPillarsGrid');
+      if (!grid) return;
+
+      grid.innerHTML = appState.pillars.map((p, idx) => {
+        const iconColor = idx % 2 === 0 ? 'text-verdemar dark:text-pizarra' : 'text-tierra';
+        return `
+          <div class="p-3.5 rounded-xl bg-arena/70 dark:bg-nocheFondo border border-crema/80 dark:border-nocheBorde">
+            <div class="flex items-center gap-2 text-xs font-bold text-carbon dark:text-arena mb-1">
+              <i class="fa-solid ${esc(p.icon || 'fa-compass')} ${iconColor}"></i>
+              <span>${esc(p.label)}</span>
+            </div>
+            <p class="text-xs text-piedra dark:text-crema/75 leading-relaxed">
+              ${esc(p.desc || 'Pilar personal anclado a mi propósito.')}
+            </p>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function populatePillarSelects() {
+      const primSel = document.getElementById('habitPrimaryPillar');
+      const secSel = document.getElementById('habitSecondaryPillar');
+      if (!primSel || !secSel) return;
+
+      const optionsHtml = appState.pillars.map(p => `<option value="${esc(p.id)}">${esc(p.label)}</option>`).join('');
+      primSel.innerHTML = optionsHtml;
+      secSel.innerHTML = `<option value="">— Ninguno —</option>` + optionsHtml;
+    }
+
+    function openPillarEditorModal() {
+      renderPillarEditorList();
+      document.getElementById('pillarEditorModal').classList.remove('hidden');
+    }
+
+    function closePillarEditorModal() {
+      document.getElementById('pillarEditorModal').classList.add('hidden');
+    }
+
+    function renderPillarEditorList() {
+      const list = document.getElementById('pillarEditorList');
+      list.innerHTML = appState.pillars.map((p, idx) => `
+        <div class="p-3.5 rounded-2xl bg-arena/65 dark:bg-nocheFondo border border-crema dark:border-nocheBorde space-y-2 text-xs">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-bold text-verdemar dark:text-pizarra">Pilar #${idx + 1}</span>
+            ${appState.pillars.length > 1 ? `
+              <button onclick="deleteCustomPillar('${esc(p.id)}')" class="text-[11px] text-terracota hover:underline font-semibold">
+                <i class="fa-solid fa-trash-can mr-1"></i>Eliminar
+              </button>
+            ` : ''}
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <select onchange="updateCustomPillarField('${esc(p.id)}', 'icon', this.value)" class="p-2 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde">
+              <option value="fa-graduation-cap" ${p.icon === 'fa-graduation-cap' ? 'selected' : ''}>🎓 Estudio</option>
+              <option value="fa-microphone" ${p.icon === 'fa-microphone' ? 'selected' : ''}>🎤 Arte / Voz</option>
+              <option value="fa-brain" ${p.icon === 'fa-brain' ? 'selected' : ''}>🧠 Mente</option>
+              <option value="fa-users" ${p.icon === 'fa-users' ? 'selected' : ''}>🤝 Presencia</option>
+              <option value="fa-dumbbell" ${p.icon === 'fa-dumbbell' ? 'selected' : ''}>💪 Cuerpo</option>
+              <option value="fa-sparkles" ${p.icon === 'fa-sparkles' ? 'selected' : ''}>✨ Espíritu</option>
+              <option value="fa-briefcase" ${p.icon === 'fa-briefcase' ? 'selected' : ''}>💼 Proyecto</option>
+            </select>
+            <input type="text" value="${esc(p.label)}" onchange="updateCustomPillarField('${esc(p.id)}', 'label', this.value)" class="sm:col-span-2 p-2 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde font-semibold">
+          </div>
+          <input type="text" value="${esc(p.desc || '')}" onchange="updateCustomPillarField('${esc(p.id)}', 'desc', this.value)" placeholder="Descripción o propósito..." class="w-full p-2 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde">
+        </div>
+      `).join('');
+    }
+
+    function updateCustomPillarField(pillarId, field, value) {
+      const p = appState.pillars.find(item => item.id === pillarId);
+      if (!p) return;
+      const cleanVal = value.trim();
+      if (field === 'label' && !cleanVal) return;
+      p[field] = cleanVal;
+      saveState();
+      renderCustomPillars();
+      renderPillarLevels();
+      renderTodayHabits();
+    }
+
+    function addNewCustomPillar() {
+      const label = document.getElementById('newPillarLabel').value.trim();
+      const desc = document.getElementById('newPillarDesc').value.trim();
+      const icon = document.getElementById('newPillarIcon').value;
+
+      if (!label) {
+        showToast("Escribe el nombre del nuevo pilar.", "error");
+        return;
+      }
+
+      const id = 'pil_' + Date.now();
+      appState.pillars.push({ id, label, icon, desc });
+      if (!appState.pillarXp) appState.pillarXp = {};
+      appState.pillarXp[id] = 0;
+
+      document.getElementById('newPillarLabel').value = '';
+      document.getElementById('newPillarDesc').value = '';
+      saveState();
+      renderPillarEditorList();
+      renderCustomPillars();
+      renderPillarLevels();
+      showToast(`Pilar "${label}" creado.`);
+    }
+
+    function deleteCustomPillar(pillarId) {
+      if (appState.pillars.length <= 1) {
+        showToast("Debes mantener al menos un pilar activo.", "error");
+        return;
+      }
+      appState.pillars = appState.pillars.filter(p => p.id !== pillarId);
+      saveState();
+      renderPillarEditorList();
+      renderCustomPillars();
+      renderPillarLevels();
+      showToast("Pilar eliminado.");
+    }
+
     function addXp(amount, primaryPillar, secondaryPillar) {
       appState.xpTotal = Math.max(0, (appState.xpTotal || 0) + amount);
-      if (primaryPillar && appState.pillarXp[primaryPillar] !== undefined) {
+      if (primaryPillar) {
+        if (appState.pillarXp[primaryPillar] === undefined) appState.pillarXp[primaryPillar] = 0;
         appState.pillarXp[primaryPillar] = Math.max(0, appState.pillarXp[primaryPillar] + amount);
       }
-      if (secondaryPillar && appState.pillarXp[secondaryPillar] !== undefined) {
+      if (secondaryPillar) {
+        if (appState.pillarXp[secondaryPillar] === undefined) appState.pillarXp[secondaryPillar] = 0;
         const half = amount > 0 ? Math.ceil(amount / 2) : Math.floor(amount / 2);
         appState.pillarXp[secondaryPillar] = Math.max(0, appState.pillarXp[secondaryPillar] + half);
       }
@@ -1846,17 +2136,18 @@
     function renderPillarLevels() {
       const grid = document.getElementById('pillarLevelsGrid');
       if (!grid) return;
-      grid.innerHTML = Object.entries(PILLAR_META).map(([key, meta]) => {
-        const xp = (appState.pillarXp && appState.pillarXp[key]) || 0;
+      grid.innerHTML = appState.pillars.map((p, idx) => {
+        const xp = (appState.pillarXp && appState.pillarXp[p.id]) || 0;
         const lv = computeLevelFromXp(xp);
         const pct = Math.min(100, Math.round((lv.currentInLevel / lv.nextLevelReq) * 100));
+        const iconColor = idx % 2 === 0 ? 'text-verdemar dark:text-pizarra' : 'text-tierra';
         return `
           <div class="p-4 rounded-2xl bg-arena/70 dark:bg-nocheFondo border border-crema/80 dark:border-nocheBorde">
             <div class="flex items-center justify-between mb-1.5">
-              <span class="text-xs font-bold text-carbon dark:text-arena inline-flex items-center gap-1.5">
-                <i class="fa-solid ${meta.icon} ${meta.color}"></i> ${meta.label}
+              <span class="text-xs font-bold text-carbon dark:text-arena inline-flex items-center gap-1.5 truncate">
+                <i class="fa-solid ${esc(p.icon || 'fa-compass')} ${iconColor}"></i> ${esc(p.label)}
               </span>
-              <span class="text-xs font-bold text-tierra">Nv. ${lv.level}</span>
+              <span class="text-xs font-bold text-tierra shrink-0">Nv. ${lv.level}</span>
             </div>
             <div class="w-full h-2 bg-crema/60 dark:bg-nocheTarjeta rounded-full overflow-hidden mb-1.5">
               <div class="h-full bg-verdemar transition-all duration-300" style="width: ${pct}%;"></div>
@@ -1868,7 +2159,7 @@
     }
 
     // =========================================================================
-    // 4. TANQUE DE HIDRATACIÓN PROJECT HAIL MARY (POR VASOS)
+    // 4. TANQUE DE HIDRATACIÓN PROJECT HAIL MARY + HISTORIAL 7 DÍAS
     // =========================================================================
     function getTodayWaterRecord() {
       const todayKey = getLocalDateKey(new Date());
@@ -1893,6 +2184,7 @@
       document.getElementById('hmGoalEditorBox').classList.add('hidden');
       saveState();
       renderWaterTank();
+      renderHoyPulseBars();
       showToast(`Meta mínima de hidratación fijada en ${val} vasos.`);
     }
 
@@ -1905,9 +2197,12 @@
 
       rec.cups = newCups;
 
+      const defaultPillar = appState.pillars[0] ? appState.pillars[0].id : null;
+      const secondPillar = appState.pillars[2] ? appState.pillars[2].id : defaultPillar;
+
       if (rec.cups >= minGoal && !rec.goalXpClaimed) {
         rec.goalXpClaimed = true;
-        addXp(12, 'claridad', 'universidad');
+        addXp(12, secondPillar, defaultPillar);
         showToast("¡Tanque Hail Mary al 100%! +12 XP de soporte vital.");
       }
 
@@ -1916,13 +2211,14 @@
         if (currentExtras > (rec.extraXpClaimed || 0)) {
           const diff = currentExtras - (rec.extraXpClaimed || 0);
           rec.extraXpClaimed = currentExtras;
-          addXp(diff * 4, 'claridad', null);
+          addXp(diff * 4, secondPillar, null);
           showToast(`¡Sobrecarga Astrofago! +${diff * 4} XP por vaso extra.`);
         }
       }
 
       saveState();
       renderWaterTank();
+      renderHoyPulseBars();
       renderLevelHeader();
     }
 
@@ -1956,27 +2252,333 @@
       if (isOverdrive) {
         fuelRect.setAttribute('fill', '#D97706');
         flame.classList.remove('hidden');
-        pctLabel.className = "text-xs font-bold text-amber-600 dark:text-amber-400";
+        pctLabel.className = "text-sm font-bold text-amber-600 dark:text-amber-400 mt-1 block";
         pctLabel.textContent = `${pct}% · Propulsión Astrofago (+${rec.cups - minGoal} extra)`;
         subtitle.textContent = "Tanque sobrecargado. Hidratación óptima activa.";
       } else if (isComplete) {
         fuelRect.setAttribute('fill', '#5C7675');
         flame.classList.remove('hidden');
-        pctLabel.className = "text-xs font-bold text-verdemar dark:text-pizarra";
+        pctLabel.className = "text-sm font-bold text-verdemar dark:text-pizarra mt-1 block";
         pctLabel.textContent = `100% · Meta mínima completada`;
         subtitle.textContent = "Listo para el salto interestelar. Vasos extra dan bono XP.";
       } else {
         fuelRect.setAttribute('fill', '#7F9897');
         flame.classList.add('hidden');
-        pctLabel.className = "text-xs font-bold text-piedra dark:text-crema/80";
+        pctLabel.className = "text-sm font-bold text-piedra dark:text-crema/80 mt-1 block";
         pctLabel.textContent = `${pct}% de carga mínima`;
         subtitle.textContent = `Faltan ${minGoal - rec.cups} vaso(s) para completar el tanque.`;
       }
+
+      renderWater7DaysChart();
+    }
+
+    function renderWater7DaysChart() {
+      const container = document.getElementById('water7DaysChart');
+      const avgLabel = document.getElementById('water7DaysAvgLabel');
+      if (!container) return;
+
+      const minGoal = appState.waterSettings.minGoal || 8;
+      const now = new Date();
+      let sumCups = 0;
+      let html = '';
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+        const k = getLocalDateKey(d);
+        const rec = appState.waterLogs[k] || { cups: 0 };
+        sumCups += rec.cups;
+
+        const pct = Math.min(100, Math.round((rec.cups / minGoal) * 100));
+        const isOver = rec.cups > minGoal;
+        const barColor = isOver ? 'bg-amber-500' : rec.cups >= minGoal ? 'bg-verdemar' : 'bg-sky-600/70';
+        const dayShort = d.toLocaleDateString('es-ES', { weekday: 'short' }).replace('.', '');
+
+        html += `
+          <div class="p-2 rounded-xl bg-arena/70 dark:bg-nocheFondo border border-crema/80 dark:border-nocheBorde flex flex-col items-center gap-1.5">
+            <span class="text-[10px] font-bold uppercase text-piedra dark:text-crema/70">${esc(dayShort)}</span>
+            <div class="w-full h-16 bg-crema/50 dark:bg-nocheTarjeta rounded-lg flex items-end overflow-hidden p-0.5">
+              <div class="w-full ${barColor} rounded-md transition-all duration-300" style="height: ${Math.max(6, pct)}%;"></div>
+            </div>
+            <span class="text-[11px] font-bold tabular-nums text-carbon dark:text-arena">${rec.cups}/${minGoal}</span>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+      if (avgLabel) avgLabel.textContent = `Promedio 7d: ${(sumCups / 7).toFixed(1)} vasos/día`;
     }
 
     // =========================================================================
-    // 5. TRACKER DE HÁBITOS (3 ESTADOS) + INCUBADORA 21 DÍAS + HIELITOS
+    // 5. TRACKER DE HÁBITOS (TOP 3 ESTRELLAS + ORDENAMIENTO + INCUBADORA 21D)
     // =========================================================================
+    function getOrderedHabitsSplit() {
+      const starred = appState.habits.filter(h => h.isStarred).slice(0, 3);
+      const starredIds = new Set(starred.map(h => h.id));
+      const normal = appState.habits.filter(h => !starredIds.has(h.id));
+      return { starred, normal };
+    }
+
+    function toggleHabitReorderMode() {
+      habitReorderMode = !habitReorderMode;
+      const btn = document.getElementById('toggleHabitReorderBtn');
+      if (habitReorderMode) {
+        btn.className = "h-[38px] px-3.5 rounded-xl bg-verdemar text-espuma text-xs font-semibold shadow-xs transition inline-flex items-center gap-1.5";
+        btn.innerHTML = `<i class="fa-solid fa-check"></i><span>Listo</span>`;
+      } else {
+        btn.className = "h-[38px] px-3.5 rounded-xl bg-arena dark:bg-nocheFondo hover:bg-crema/70 border border-crema dark:border-nocheBorde text-xs font-semibold text-carbon dark:text-arena transition inline-flex items-center gap-1.5";
+        btn.innerHTML = `<i class="fa-solid fa-arrows-up-down"></i><span>Ordenar</span>`;
+      }
+      renderTodayHabits();
+    }
+
+    function moveHabitWithinGroup(habitId, direction) {
+      const { starred, normal } = getOrderedHabitsSplit();
+      const sIdx = starred.findIndex(h => h.id === habitId);
+      if (sIdx !== -1) {
+        const target = sIdx + direction;
+        if (target < 0 || target >= starred.length) return;
+        const temp = starred[sIdx];
+        starred[sIdx] = starred[target];
+        starred[target] = temp;
+      } else {
+        const nIdx = normal.findIndex(h => h.id === habitId);
+        if (nIdx === -1) return;
+        const target = nIdx + direction;
+        if (target < 0 || target >= normal.length) return;
+        const temp = normal[nIdx];
+        normal[nIdx] = normal[target];
+        normal[target] = temp;
+      }
+
+      appState.habits = [...starred, ...normal];
+      saveState();
+      renderTodayHabits();
+    }
+
+    function toggleStarHabit(habitId) {
+      const habit = appState.habits.find(h => h.id === habitId);
+      if (!habit) return;
+
+      if (habit.isStarred) {
+        habit.isStarred = false;
+        showToast(`Estrella quitada de "${habit.name}".`);
+      } else {
+        const currentStarredCount = appState.habits.filter(h => h.isStarred).length;
+        if (currentStarredCount >= 3) {
+          showToast("Límite máximo: solo puedes tener 3 hábitos estrella en tu Top 3. Desmarca uno primero.", "error");
+          return;
+        }
+        habit.isStarred = true;
+        showToast(`⭐ "${habit.name}" subió a tu Top 3 Prioritario.`);
+      }
+
+      const { starred, normal } = getOrderedHabitsSplit();
+      appState.habits = [...starred, ...normal];
+      saveState();
+      renderTodayHabits();
+      renderHoyPulseBars();
+    }
+
+    function checkAndGrantTop3DailyBonus(todayKey) {
+      const { starred } = getOrderedHabitsSplit();
+      if (starred.length < 3) return;
+      const all3Done = starred.every(h => h.logs && h.logs[todayKey] === 'done');
+      if (all3Done && !appState.top3BonusClaimedDates[todayKey]) {
+        appState.top3BonusClaimedDates[todayKey] = true;
+        addXp(15, starred[0].primaryPillar, starred[1].primaryPillar);
+        showToast("🌟 ¡Tríada Diaria Completada! +15 XP extra por cumplir tu Top 3 Estrella.");
+      }
+    }
+
+    function setHabitDayStatus(habitId, status) {
+      const habit = appState.habits.find(h => h.id === habitId);
+      if (!habit) return;
+      if (!habit.logs) habit.logs = {};
+
+      const todayKey = getLocalDateKey(new Date());
+      const prevStatus = habit.logs[todayKey] || null;
+      const xpGain = habit.isStarred ? 10 : 8;
+
+      if (prevStatus === status) {
+        delete habit.logs[todayKey];
+        if (prevStatus === 'done') addXp(-xpGain, habit.primaryPillar, habit.secondaryPillar);
+        if (prevStatus === 'missed') addXp(4, habit.primaryPillar, null);
+      } else {
+        if (prevStatus === 'done') addXp(-xpGain, habit.primaryPillar, habit.secondaryPillar);
+        if (prevStatus === 'missed') addXp(4, habit.primaryPillar, null);
+
+        habit.logs[todayKey] = status;
+        if (status === 'done') {
+          addXp(xpGain, habit.primaryPillar, habit.secondaryPillar);
+          showToast(`✓ "${habit.name}" completado (+${xpGain} XP).`);
+          checkAndGrantTop3DailyBonus(todayKey);
+        } else if (status === 'missed') {
+          addXp(-4, habit.primaryPillar, null);
+          showToast(`✗ "${habit.name}" marcado como no cumplido (-4 XP).`);
+        } else if (status === 'postponed') {
+          showToast(`🕒 "${habit.name}" pospuesto para otro día (sin penalización).`);
+        }
+      }
+
+      saveState();
+      renderTodayHabits();
+      renderHoyPulseBars();
+      renderLevelHeader();
+    }
+
+    function deleteHabit(habitId) {
+      appState.habits = appState.habits.filter(h => h.id !== habitId);
+      saveState();
+      renderTodayHabits();
+      renderHoyPulseBars();
+      showToast("Hábito eliminado.");
+    }
+
+    function renderHabitRowHtml(h, rankNumber, isFirstInGroup, isLastInGroup) {
+      const todayKey = getLocalDateKey(new Date());
+      const status = (h.logs && h.logs[todayKey]) || 'pending';
+      const isStarred = !!h.isStarred;
+      const pMeta = getPillarById(h.primaryPillar);
+      const freqLabel = h.weeklyTarget === 7 ? 'Diario' : `${h.weeklyTarget}x / sem.`;
+
+      const btnDoneCls = status === 'done'
+        ? 'bg-verdemar text-espuma border-verdemar shadow-xs'
+        : 'bg-espuma dark:bg-nocheTarjeta text-piedra hover:border-verdemar border-crema dark:border-nocheBorde';
+      const btnMissCls = status === 'missed'
+        ? 'bg-terracota text-espuma border-terracota shadow-xs'
+        : 'bg-espuma dark:bg-nocheTarjeta text-piedra hover:border-terracota border-crema dark:border-nocheBorde';
+      const btnPostCls = status === 'postponed'
+        ? 'bg-tierra text-espuma border-tierra shadow-xs'
+        : 'bg-espuma dark:bg-nocheTarjeta text-piedra hover:border-tierra border-crema dark:border-nocheBorde';
+
+      return `
+        <div class="p-3.5 rounded-2xl bg-arena/70 dark:bg-nocheFondo border ${isStarred ? 'border-amber-500/60 shadow-xs' : 'border-crema/80 dark:border-nocheBorde'} flex items-center justify-between gap-2.5">
+          <div class="flex items-center gap-2.5 min-w-0 flex-1">
+            <button onclick="toggleStarHabit('${esc(h.id)}')" title="${isStarred ? 'Quitar de Top 3' : 'Fijar en Top 3 Estrella'}" class="text-base ${isStarred ? 'text-amber-500' : 'text-piedra/35 hover:text-amber-500'} shrink-0 transition">
+              <i class="fa-${isStarred ? 'solid' : 'regular'} fa-star"></i>
+            </button>
+            <div class="min-w-0">
+              <div class="flex flex-wrap items-center gap-1.5">
+                ${rankNumber ? `<span class="px-1.5 py-0.5 rounded bg-amber-500 text-white text-[10px] font-bold shrink-0">#${rankNumber}</span>` : ''}
+                <span class="text-xs sm:text-sm font-semibold text-carbon dark:text-arena truncate ${status === 'done' ? 'line-through opacity-75' : ''}">${esc(h.name)}</span>
+              </div>
+              <span class="text-[11px] text-piedra dark:text-crema/65 block mt-0.5">
+                <i class="fa-solid ${esc(pMeta.icon || 'fa-compass')} text-verdemar dark:text-pizarra mr-1"></i>${esc(pMeta.label)} · ${freqLabel}
+              </span>
+            </div>
+          </div>
+
+          ${habitReorderMode ? `
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="moveHabitWithinGroup('${esc(h.id)}', -1)" ${isFirstInGroup ? 'disabled' : ''} aria-label="Subir" class="w-9 h-9 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde text-xs font-bold disabled:opacity-30 hover:border-verdemar transition">
+                <i class="fa-solid fa-arrow-up"></i>
+              </button>
+              <button onclick="moveHabitWithinGroup('${esc(h.id)}', 1)" ${isLastInGroup ? 'disabled' : ''} aria-label="Bajar" class="w-9 h-9 rounded-xl bg-espuma dark:bg-nocheTarjeta border border-crema dark:border-nocheBorde text-xs font-bold disabled:opacity-30 hover:border-verdemar transition">
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+              <button onclick="deleteHabit('${esc(h.id)}')" title="Eliminar hábito" aria-label="Eliminar hábito" class="w-9 h-9 rounded-xl text-terracota hover:bg-terracota/15 text-xs flex items-center justify-center">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          ` : `
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="setHabitDayStatus('${esc(h.id)}', 'done')" title="Cumplido" aria-label="Cumplido" class="w-9 h-9 rounded-xl border ${btnDoneCls} flex items-center justify-center text-xs transition">
+                <i class="fa-solid fa-check"></i>
+              </button>
+              <button onclick="setHabitDayStatus('${esc(h.id)}', 'missed')" title="No cumplido" aria-label="No cumplido" class="w-9 h-9 rounded-xl border ${btnMissCls} flex items-center justify-center text-xs transition">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              <button onclick="setHabitDayStatus('${esc(h.id)}', 'postponed')" title="Otro día / Posponer" aria-label="Otro día" class="w-9 h-9 rounded-xl border ${btnPostCls} flex items-center justify-center text-xs transition">
+                <i class="fa-regular fa-clock"></i>
+              </button>
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    function renderTodayHabits() {
+      const container = document.getElementById('todayHabitsList');
+      const top3Pill = document.getElementById('top3CounterPill');
+      if (!container) return;
+
+      const { starred, normal } = getOrderedHabitsSplit();
+      if (top3Pill) top3Pill.textContent = `⭐ ${starred.length}/3`;
+
+      if (!appState.habits.length) {
+        container.innerHTML = `
+          <div class="p-6 rounded-2xl bg-arena/60 dark:bg-nocheFondo border border-dashed border-crema dark:border-nocheBorde text-center">
+            <p class="text-xs font-semibold text-carbon dark:text-arena mb-1">Tu lista de hábitos está limpia</p>
+            <p class="text-[11px] text-piedra dark:text-crema/70 mb-3">Agrega tus hábitos diarios o semanales y marca tus 3 más importantes con estrella (⭐).</p>
+            <button onclick="openNewHabitModal('permanent')" class="px-4 py-2 rounded-xl bg-verdemar text-espuma text-xs font-semibold">
+              + Crear mi primer hábito
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+
+      if (starred.length > 0) {
+        html += `<div class="mb-2"><span class="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300">⭐ Top 3 Prioritario (Orden de importancia)</span></div>`;
+        html += `<div class="space-y-2 mb-4">` + starred.map((h, idx) =>
+          renderHabitRowHtml(h, idx + 1, idx === 0, idx === starred.length - 1)
+        ).join('') + `</div>`;
+      }
+
+      if (normal.length > 0) {
+        if (starred.length > 0) {
+          html += `<div class="mb-2 pt-2 border-t border-crema/70 dark:border-nocheBorde"><span class="text-[10px] font-bold uppercase tracking-wider text-piedra dark:text-crema/65">Resto de Hábitos</span></div>`;
+        }
+        html += `<div class="space-y-2">` + normal.map((h, idx) =>
+          renderHabitRowHtml(h, null, idx === 0, idx === normal.length - 1)
+        ).join('') + `</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function renderHoyPulseBars() {
+      const todayKey = getLocalDateKey(new Date());
+      const totalHabits = appState.habits.length;
+      const doneHabits = appState.habits.filter(h => h.logs && h.logs[todayKey] === 'done').length;
+      const habPct = totalHabits > 0 ? Math.round((doneHabits / totalHabits) * 100) : 0;
+
+      const { starred } = getOrderedHabitsSplit();
+      const starredDone = starred.filter(h => h.logs && h.logs[todayKey] === 'done').length;
+
+      const hLabel = document.getElementById('hoyHabitsBarLabel');
+      const hFill = document.getElementById('hoyHabitsBarFill');
+      const hStars = document.getElementById('hoyTop3StarsStatus');
+      if (hLabel) hLabel.textContent = `${doneHabits} / ${totalHabits} (${habPct}%)`;
+      if (hFill) hFill.style.width = `${habPct}%`;
+      if (hStars) hStars.textContent = starred.length > 0
+        ? `⭐ Top 3 Estrella: ${starredDone}/${starred.length} completados`
+        : `⭐ Marca hasta 3 hábitos estrella en Hábitos`;
+
+      const waterRec = getTodayWaterRecord();
+      const minGoal = appState.waterSettings.minGoal || 8;
+      const wPct = Math.min(100, Math.round((waterRec.cups / minGoal) * 100));
+      const wLabel = document.getElementById('hoyWaterBarLabel');
+      const wFill = document.getElementById('hoyWaterBarFill');
+      const wSub = document.getElementById('hoyWaterSubStatus');
+      if (wLabel) wLabel.textContent = `${waterRec.cups} / ${minGoal} vasos`;
+      if (wFill) {
+        wFill.style.width = `${wPct}%`;
+        wFill.className = waterRec.cups > minGoal
+          ? "h-full bg-amber-500 transition-all duration-300"
+          : "h-full bg-sky-600 transition-all duration-300";
+      }
+      if (wSub) wSub.textContent = waterRec.cups > minGoal
+        ? `Propulsión Astrofago (+${waterRec.cups - minGoal} extra)`
+        : `${Math.round((waterRec.cups / minGoal) * 100)}% de carga mínima`;
+
+      const chSum = document.getElementById('hoyChallengesSummary');
+      if (chSum) chSum.textContent = `${appState.challenges21.length} reto(s) en curso`;
+    }
+
+    // --- INCUBADORA DE 21 DÍAS + HIELITOS ADAPTATIVOS ---
     function checkMonthlyIceCubeCalibration() {
       const currentMonth = getCurrentMonthKey(new Date());
       if (!appState.iceCubes) {
@@ -2029,6 +2631,7 @@
 
     function openNewHabitModal(mode) {
       newHabitModalMode = mode || 'permanent';
+      populatePillarSelects();
       setNewHabitMode(newHabitModalMode);
       document.getElementById('habitNameInput').value = '';
       document.getElementById('newHabitModal').classList.remove('hidden');
@@ -2081,10 +2684,11 @@
           weeklyTarget,
           primaryPillar,
           secondaryPillar,
+          isStarred: false,
           logs: {},
           createdAt: new Date().toISOString()
         });
-        showToast(`Hábito "${name}" añadido a tu lista diaria.`);
+        showToast(`Hábito "${name}" añadido.`);
       } else {
         appState.challenges21.push({
           id: 'ch21_' + Date.now(),
@@ -2104,126 +2708,6 @@
       renderAll();
     }
 
-    function toggleAnchorHabit(habitId) {
-      appState.anchorHabitId = (appState.anchorHabitId === habitId) ? null : habitId;
-      saveState();
-      renderTodayHabits();
-      showToast(appState.anchorHabitId
-        ? "⭐ Hábito Ancla guardado en tu sesión."
-        : "Hábito Ancla desmarcado.");
-    }
-
-    function setHabitDayStatus(habitId, status) {
-      const habit = appState.habits.find(h => h.id === habitId);
-      if (!habit) return;
-      if (!habit.logs) habit.logs = {};
-
-      const todayKey = getLocalDateKey(new Date());
-      const prevStatus = habit.logs[todayKey] || null;
-
-      if (prevStatus === status) {
-        delete habit.logs[todayKey];
-        if (prevStatus === 'done') addXp(-8, habit.primaryPillar, habit.secondaryPillar);
-        if (prevStatus === 'missed') addXp(4, habit.primaryPillar, null);
-      } else {
-        if (prevStatus === 'done') addXp(-8, habit.primaryPillar, habit.secondaryPillar);
-        if (prevStatus === 'missed') addXp(4, habit.primaryPillar, null);
-
-        habit.logs[todayKey] = status;
-        if (status === 'done') {
-          addXp(8, habit.primaryPillar, habit.secondaryPillar);
-          showToast(`✓ "${habit.name}" completado (+8 XP).`);
-        } else if (status === 'missed') {
-          addXp(-4, habit.primaryPillar, null);
-          showToast(`✗ "${habit.name}" marcado como no cumplido (-4 XP).`);
-        } else if (status === 'postponed') {
-          showToast(`🕒 "${habit.name}" pospuesto para otro día (sin penalización).`);
-        }
-      }
-
-      saveState();
-      renderTodayHabits();
-      renderLevelHeader();
-    }
-
-    function deleteHabit(habitId) {
-      appState.habits = appState.habits.filter(h => h.id !== habitId);
-      if (appState.anchorHabitId === habitId) appState.anchorHabitId = null;
-      saveState();
-      renderTodayHabits();
-      showToast("Hábito eliminado.");
-    }
-
-    function renderTodayHabits() {
-      const container = document.getElementById('todayHabitsList');
-      const todayKey = getLocalDateKey(new Date());
-
-      if (!appState.habits.length) {
-        container.innerHTML = `
-          <div class="p-6 rounded-2xl bg-arena/60 dark:bg-nocheFondo border border-dashed border-crema dark:border-nocheBorde text-center">
-            <p class="text-xs font-semibold text-carbon dark:text-arena mb-1">Tu lista de hábitos está limpia</p>
-            <p class="text-[11px] text-piedra dark:text-crema/70 mb-3">Agrega tus hábitos diarios o semanales (ej. Estudio, Freestyle, Meditar, Sleep 6 ciclos) para registrarlos aquí.</p>
-            <button onclick="openNewHabitModal('permanent')" class="px-4 py-2 rounded-xl bg-verdemar text-espuma text-xs font-semibold">
-              + Crear mi primer hábito
-            </button>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = appState.habits.map(h => {
-        const status = (h.logs && h.logs[todayKey]) || 'pending';
-        const isAnchor = appState.anchorHabitId === h.id;
-        const pMeta = PILLAR_META[h.primaryPillar] || PILLAR_META.claridad;
-        const freqLabel = h.weeklyTarget === 7 ? 'Diario' : `${h.weeklyTarget}x / semana`;
-
-        const btnDoneCls = status === 'done'
-          ? 'bg-verdemar text-espuma border-verdemar shadow-xs'
-          : 'bg-espuma dark:bg-nocheTarjeta text-piedra hover:border-verdemar border-crema dark:border-nocheBorde';
-        const btnMissCls = status === 'missed'
-          ? 'bg-terracota text-espuma border-terracota shadow-xs'
-          : 'bg-espuma dark:bg-nocheTarjeta text-piedra hover:border-terracota border-crema dark:border-nocheBorde';
-        const btnPostCls = status === 'postponed'
-          ? 'bg-tierra text-espuma border-tierra shadow-xs'
-          : 'bg-espuma dark:bg-nocheTarjeta text-piedra hover:border-tierra border-crema dark:border-nocheBorde';
-
-        return `
-          <div class="p-3 rounded-2xl bg-arena/70 dark:bg-nocheFondo border ${isAnchor ? 'border-amber-500/60' : 'border-crema/80 dark:border-nocheBorde'} flex items-center justify-between gap-2.5">
-            <div class="flex items-center gap-2.5 min-w-0 flex-1">
-              <button onclick="toggleAnchorHabit('${esc(h.id)}')" title="${isAnchor ? 'Hábito Ancla activo' : 'Marcar como Hábito Ancla'}" class="text-sm ${isAnchor ? 'text-amber-500' : 'text-piedra/40 hover:text-amber-500'} shrink-0 transition">
-                <i class="fa-${isAnchor ? 'solid' : 'regular'} fa-star"></i>
-              </button>
-              <div class="min-w-0">
-                <div class="flex items-center gap-1.5">
-                  <span class="text-xs sm:text-sm font-semibold text-carbon dark:text-arena truncate ${status === 'done' ? 'line-through opacity-75' : ''}">${esc(h.name)}</span>
-                  ${isAnchor ? '<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-700 dark:text-amber-300 text-[9px] font-bold uppercase shrink-0">Ancla</span>' : ''}
-                </div>
-                <span class="text-[11px] text-piedra dark:text-crema/65 block">
-                  <i class="fa-solid ${pMeta.icon} ${pMeta.color} mr-1"></i>${pMeta.label} · ${freqLabel}
-                </span>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-1.5 shrink-0">
-              <button onclick="setHabitDayStatus('${esc(h.id)}', 'done')" title="Cumplido" aria-label="Cumplido" class="w-9 h-9 rounded-xl border ${btnDoneCls} flex items-center justify-center text-xs transition">
-                <i class="fa-solid fa-check"></i>
-              </button>
-              <button onclick="setHabitDayStatus('${esc(h.id)}', 'missed')" title="No cumplido" aria-label="No cumplido" class="w-9 h-9 rounded-xl border ${btnMissCls} flex items-center justify-center text-xs transition">
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-              <button onclick="setHabitDayStatus('${esc(h.id)}', 'postponed')" title="Otro día / Posponer" aria-label="Otro día" class="w-9 h-9 rounded-xl border ${btnPostCls} flex items-center justify-center text-xs transition">
-                <i class="fa-regular fa-clock"></i>
-              </button>
-              <button onclick="deleteHabit('${esc(h.id)}')" title="Eliminar hábito" aria-label="Eliminar hábito" class="w-7 h-9 text-piedra/45 hover:text-terracota text-[11px] flex items-center justify-center">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // --- INCUBADORA DE 21 DÍAS ---
     function markChallenge21Today(challengeId, action) {
       const ch = appState.challenges21.find(c => c.id === challengeId);
       if (!ch) return;
@@ -2265,6 +2749,7 @@
 
       saveState();
       renderChallenges21();
+      renderHoyPulseBars();
       renderLevelHeader();
     }
 
@@ -2277,6 +2762,7 @@
           weeklyTarget: 7,
           primaryPillar: ch.primaryPillar,
           secondaryPillar: ch.secondaryPillar,
+          isStarred: false,
           logs: {},
           createdAt: new Date().toISOString()
         });
@@ -2296,16 +2782,19 @@
       appState.challenges21 = appState.challenges21.filter(c => c.id !== challengeId);
       saveState();
       renderChallenges21();
+      renderHoyPulseBars();
     }
 
     function renderChallenges21() {
       const container = document.getElementById('challenges21List');
+      if (!container) return;
+
       document.getElementById('iceCubeCount').textContent = appState.iceCubes.available || 0;
       document.getElementById('iceCubeQuota').textContent = appState.iceCubes.monthlyQuota || 2;
       document.getElementById('iceCubeCalibrationNote').textContent = appState.iceCubes.lastCalibrationNote || 'Protector automático de racha';
 
       if (!appState.challenges21.length) {
-        container.innerHTML = `<p class="text-xs text-piedra/70 dark:text-crema/60 italic">No tienes retos de 21 días activos. Pulsa <strong>+ Reto 21d</strong> para incubar un nuevo hábito.</p>`;
+        container.innerHTML = `<p class="text-xs text-piedra/70 dark:text-crema/60 italic col-span-full">No tienes retos de 21 días activos. Pulsa <strong>Agregar Reto 21 Días</strong> para incubar un nuevo hábito.</p>`;
         return;
       }
 
@@ -2314,7 +2803,7 @@
       container.innerHTML = appState.challenges21.map(ch => {
         const todayStatus = ch.history ? ch.history[todayKey] : null;
         const pct = Math.min(100, Math.round(((ch.currentStreak || 0) / 21) * 100));
-        const pMeta = PILLAR_META[ch.primaryPillar] || PILLAR_META.claridad;
+        const pMeta = getPillarById(ch.primaryPillar);
 
         return `
           <div class="p-3.5 rounded-2xl bg-arena/70 dark:bg-nocheFondo border border-crema dark:border-nocheBorde">
@@ -2322,7 +2811,7 @@
               <div>
                 <span class="text-xs font-bold text-carbon dark:text-arena block">${esc(ch.name)}</span>
                 <span class="text-[11px] text-piedra dark:text-crema/70">
-                  <i class="fa-solid ${pMeta.icon} ${pMeta.color} mr-1"></i>${pMeta.label} · Récord: <strong>${ch.bestRecord || 0}d</strong>
+                  <i class="fa-solid ${esc(pMeta.icon || 'fa-compass')} text-verdemar dark:text-pizarra mr-1"></i>${esc(pMeta.label)} · Récord: <strong>${ch.bestRecord || 0}d</strong>
                 </span>
               </div>
               <div class="flex items-center gap-1.5">
@@ -2424,7 +2913,7 @@
 
         return `
           <div class="px-3.5 py-2.5 rounded-xl bg-arena/50 dark:bg-nocheFondo/70 border border-crema/70 dark:border-nocheBorde flex items-center justify-between text-xs">
-            <span class="font-medium text-carbon dark:text-arena">${esc(h.name)}</span>
+            <span class="font-medium text-carbon dark:text-arena">${h.isStarred ? '⭐ ' : ''}${esc(h.name)}</span>
             <span class="${color}">${label}</span>
           </div>
         `;
@@ -2627,7 +3116,9 @@
         appState.bestStreak = cleanDays;
       }
 
-      addXp(15, 'claridad', 'presencia');
+      const p1 = appState.pillars[2] ? appState.pillars[2].id : (appState.pillars[0] ? appState.pillars[0].id : null);
+      const p2 = appState.pillars[3] ? appState.pillars[3].id : null;
+      addXp(15, p1, p2);
       saveState();
       renderAll();
       showToast("¡Excelente! Día limpio registrado (+15 XP).");
@@ -2724,6 +3215,7 @@
 
       renderLevelHeader();
       renderHeroStatusCard();
+      renderHoyPulseBars();
       renderWaterTank();
       renderTodayHabits();
       renderChallenges21();
@@ -2731,6 +3223,7 @@
       renderReflectionCard();
       renderInlineCalendar();
       renderActionButtons();
+      renderCustomPillars();
       renderOwnQuotes();
       renderJournalHistory();
       renderPillarLevels();
@@ -2929,7 +3422,8 @@
             fsTotalSeconds = 300;
             fsWordSeconds = 10;
             appState.freestyleMinutes += 5;
-            addXp(10, 'freestyle', 'claridad');
+            const fsPillar = appState.pillars[1] ? appState.pillars[1].id : null;
+            addXp(10, fsPillar, null);
             saveState();
             renderAll();
             btn.innerHTML = `<i class="fa-solid fa-play"></i><span>Iniciar Ronda</span>`;
@@ -3021,7 +3515,7 @@
             cycleCountEl.textContent = `Ciclos completados: ${breathCycles} / 3`;
             if (breathCycles >= 3) {
               stopBreathingExercise();
-              addXp(6, 'claridad', null);
+              addXp(6, null, null);
               saveState();
               renderLevelHeader();
               showToast("3 ciclos 4-2-6 completados (+6 XP). Sistema nervioso regulado.");
@@ -3087,7 +3581,7 @@
       });
 
       document.getElementById('impulseNoteInput').value = '';
-      addXp(5, 'claridad', null);
+      addXp(5, null, null);
       saveState();
       closeImpulseModal();
       renderAll();
@@ -3273,7 +3767,7 @@
     }
 
     // =========================================================================
-    // 10. PILARES, FRASES PROPIAS Y BITÁCORA
+    // 10. FRASES PROPIAS Y BITÁCORA
     // =========================================================================
     function addOwnQuote() {
       const input = document.getElementById('newOwnQuoteInput');
@@ -3345,7 +3839,7 @@
       });
 
       ta.value = '';
-      addXp(8, 'claridad', 'presencia');
+      addXp(8, null, null);
       saveState();
       renderAll();
       showToast("Entrada guardada en tu bitácora (+8 XP).");
@@ -3821,6 +4315,10 @@
         dateKeysInWindow.push(getLocalDateKey(new Date(now - d * 86400000)));
       }
 
+      const { starred } = getOrderedHabitsSplit();
+      const starredRankMap = {};
+      starred.forEach((h, i) => { starredRankMap[h.id] = i + 1; });
+
       const habitPerformanceLines = appState.habits.map(h => {
         let done = 0;
         let missed = 0;
@@ -3831,8 +4329,8 @@
           else if (st === 'missed') missed++;
           else if (st === 'postponed') postponed++;
         });
-        const isAnchorTag = appState.anchorHabitId === h.id ? ' [HÁBITO ANCLA ⭐]' : '';
-        return `  - ${h.name}${isAnchorTag}: ${done} cumplidos, ${missed} fallidos, ${postponed} pospuestos (meta: ${h.weeklyTarget}x/sem)`;
+        const starTag = starredRankMap[h.id] ? ` [TOP #${starredRankMap[h.id]} ESTRELLA ⭐]` : '';
+        return `  - ${h.name}${starTag}: ${done} cumplidos, ${missed} fallidos, ${postponed} pospuestos (meta: ${h.weeklyTarget}x/sem)`;
       });
 
       let waterDaysCount = 0;
@@ -3866,23 +4364,23 @@
         });
       }
 
-      if (appState.anchorHabitId && appState.habits.length > 1) {
-        const anchor = appState.habits.find(h => h.id === appState.anchorHabitId);
-        if (anchor) {
-          let anchorDoneDays = 0;
-          let otherCompletionOnAnchorDays = 0;
-          dateKeysInWindow.forEach(dk => {
-            if (anchor.logs && anchor.logs[dk] === 'done') {
-              anchorDoneDays++;
-              const others = appState.habits.filter(o => o.id !== anchor.id);
-              const othersDone = others.filter(o => o.logs && o.logs[dk] === 'done').length;
-              otherCompletionOnAnchorDays += (othersDone / others.length);
-            }
-          });
-          if (anchorDoneDays > 0) {
-            const avgOtherPct = Math.round((otherCompletionOnAnchorDays / anchorDoneDays) * 100);
-            empiricalPatterns.push(`Efecto Hábito Ancla ("${anchor.name}"): los ${anchorDoneDays} días que lo cumpliste, el resto de tus hábitos alcanzó un ${avgOtherPct}% de cumplimiento.`);
+      if (starred.length > 0 && appState.habits.length > starred.length) {
+        let triadCompleteDays = 0;
+        let otherCompletionOnTriadDays = 0;
+        const others = appState.habits.filter(o => !starredRankMap[o.id]);
+
+        dateKeysInWindow.forEach(dk => {
+          const allStarsDone = starred.every(s => s.logs && s.logs[dk] === 'done');
+          if (allStarsDone) {
+            triadCompleteDays++;
+            const othersDone = others.filter(o => o.logs && o.logs[dk] === 'done').length;
+            otherCompletionOnTriadDays += (othersDone / others.length);
           }
+        });
+
+        if (triadCompleteDays > 0) {
+          const avgOtherPct = Math.round((otherCompletionOnTriadDays / triadCompleteDays) * 100);
+          empiricalPatterns.push(`Efecto Top 3 Estrella: los ${triadCompleteDays} días en que completaste todos tus hábitos estrella, el resto de tus hábitos alcanzó un ${avgOtherPct}% de cumplimiento.`);
         }
       }
 
@@ -3925,6 +4423,7 @@
       const cleanDays = calculateCleanDays();
       const cal = getCalibrationStats();
       const lvInfo = computeLevelFromXp(appState.xpTotal || 0);
+      const pillarsListStr = appState.pillars.map((p, i) => `(${i + 1}) ${p.label}`).join(', ');
 
       const recentImpulses = appState.impulses.filter(i => new Date(i.date).getTime() >= stats.cutoff);
       const recentJournals = appState.journals.filter(j => new Date(j.date).getTime() >= stats.cutoff);
@@ -3943,7 +4442,7 @@
         : '  - Sin notas escritas en este periodo.';
 
       const prompt = `Actúa como mi entrenador personal cálido, compasivo y estratégico para el sistema "Mente Clara".
-Mis 4 pilares son: (1) Universidad, (2) Clases y Batallas de Freestyle, (3) Claridad Mental y Autoestima, (4) Presencia real en conversaciones.
+Mis pilares personales actuales son: ${pillarsListStr}.
 
 RESUMEN ESTADÍSTICO Y PATRONES DETECTADOS AUTOMÁTICAMENTE:
 - Días limpios actuales sin pornografía: ${cleanDays} días (Racha récord: ${appState.bestStreak} días).
@@ -3956,7 +4455,7 @@ RESUMEN ESTADÍSTICO Y PATRONES DETECTADOS AUTOMÁTICAMENTE:
 
 RENDIMIENTO DE HÁBITOS, HIDRATACIÓN HAIL MARY E INCUBADORA 21 DÍAS:
 - Hidratación diaria: ${stats.waterSummary}
-- Hábitos permanentes:
+- Hábitos permanentes (ordenados por prioridad Top 3 Estrella):
 ${stats.habitPerformanceLines}
 - Incubadora de 21 días (Hielitos disponibles este mes: ${appState.iceCubes.available}/${appState.iceCubes.monthlyQuota} · ${appState.iceCubes.lastCalibrationNote}):
 ${stats.challengesLines}
