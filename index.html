@@ -4183,6 +4183,43 @@ BARRERA | [Regla física o digital concreta para añadir al checklist nocturno] 
         return snap.exists() ? snap.data().state : null;
       }
     };
+    // =========================================================================
+    // PASO 5: SINCRONIZACIÓN AUTOMÁTICA DE MENTE CLARA CON FIRESTORE
+    // =========================================================================
+    window.onStateSaved = function () {
+      if (!window.menteClaraCloud || typeof appState === 'undefined') return;
+      window.menteClaraCloud.save(appState).catch(err => {
+        console.warn("Sincronización con Firestore pendiente (respaldo local activo):", err);
+      });
+    };
+
+    async function hydrateFromMenteClaraCloud() {
+      if (!window.menteClaraCloud || typeof appState === 'undefined') return;
+      try {
+        const remoteState = await window.menteClaraCloud.load();
+        if (!remoteState || typeof remoteState !== 'object') return;
+
+        const localTs = appState._updatedAt ? Date.parse(appState._updatedAt) : 0;
+        const remoteTs = remoteState._updatedAt ? Date.parse(remoteState._updatedAt) : 0;
+
+        if (remoteTs > localTs) {
+          appState = Object.assign(getDefaultState(), remoteState);
+          saveState({ fromSync: true });
+          renderAll();
+          showToast("Datos sincronizados desde la nube.");
+        } else if (localTs > remoteTs) {
+          await window.menteClaraCloud.save(appState);
+        }
+      } catch (err) {
+        console.warn("No se pudo cargar estado inicial desde Firestore:", err);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => setTimeout(hydrateFromMenteClaraCloud, 300));
+    } else {
+      setTimeout(hydrateFromMenteClaraCloud, 300);
+    }
   </script>
 </body>
 </html>
