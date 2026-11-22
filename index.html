@@ -4146,8 +4146,60 @@ BARRERA | [Regla física o digital concreta para añadir al checklist nocturno] 
   <script src="./js/extras.js"></script>
   <script type="module" src="./js/account.js"></script>
   <!-- ===================================================================== -->
-  <!-- PASO 4: CONEXIÓN FIREBASE FIRESTORE PARA MENTE CLARA                  -->
+  <!-- MODALES AUXILIARES + LOGIN GOOGLE + FIRESTORE PARA MENTE CLARA       -->
   <!-- ===================================================================== -->
+  <script>
+    window.openAccountModal = function () {
+      const modal = document.getElementById('accountModal');
+      if (modal) modal.classList.remove('hidden');
+    };
+    window.closeAccountModal = function () {
+      const modal = document.getElementById('accountModal');
+      if (modal) modal.classList.add('hidden');
+    };
+    window.openRemindersModal = function () {
+      const modal = document.getElementById('remindersModal');
+      if (modal) modal.classList.remove('hidden');
+    };
+    window.closeRemindersModal = function () {
+      const modal = document.getElementById('remindersModal');
+      if (modal) modal.classList.add('hidden');
+    };
+    window.saveReminders = function () {
+      window.closeRemindersModal();
+      if (typeof showToast === 'function') showToast('Recordatorios actualizados.');
+    };
+    window.openWeeklyReviewModal = function () {
+      const modal = document.getElementById('weeklyReviewModal');
+      if (modal) modal.classList.remove('hidden');
+    };
+    window.closeWeeklyReviewModal = function () {
+      const modal = document.getElementById('weeklyReviewModal');
+      if (modal) modal.classList.add('hidden');
+    };
+    window.openSosModal = function () {
+      const modal = document.getElementById('sosModal');
+      if (modal) modal.classList.remove('hidden');
+    };
+    window.closeSosModal = function () {
+      const modal = document.getElementById('sosModal');
+      if (modal) modal.classList.add('hidden');
+    };
+    window.sosAction = function (action) {
+      window.closeSosModal();
+      if (action === 'breath' && typeof openBreathingModal === 'function') openBreathingModal();
+      else if (action === 'challenge' && typeof triggerCoachSupport === 'function') {
+        if (typeof switchMainTab === 'function') switchMainTab('radar');
+        triggerCoachSupport();
+      } else if (action === 'freestyle' && typeof openFreestyleModal === 'function') openFreestyleModal();
+      else if (action === 'log' && typeof openImpulseModal === 'function') openImpulseModal();
+    };
+    window.closeBadgeUnlockModal = function () {
+      const modal = document.getElementById('badgeUnlockModal');
+      if (modal) modal.classList.add('hidden');
+    };
+  </script>
+
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import {
